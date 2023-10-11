@@ -6,6 +6,7 @@ package com.mycompany.deliverycontrol.repository;
 import com.mycompany.deliverycontrol.CRUD.IRegistraPedidoCRUD;
 import com.mycompany.deliverycontrol.model.Pedido;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class RegistraPedidoDAO implements IRegistraPedidoCRUD {
     String nomeDoArquivo = null;
 
     public RegistraPedidoDAO() {
-        nomeDoArquivo = System.getenv("USERPROFILE") +  "\\Documents\\PI\\deliveryControl\\src\\main\\java\\dados\\pedidos.txt";
+        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\pedidos.txt";
     }
 
     @Override

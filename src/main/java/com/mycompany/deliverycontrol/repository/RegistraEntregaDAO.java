@@ -10,6 +10,7 @@ import com.mycompany.deliverycontrol.model.EntregaCancelada;
 import com.mycompany.deliverycontrol.model.EntregaRealizada;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,8 +31,8 @@ public class RegistraEntregaDAO implements IRegistraEntregaCRUD {
     private String arquivo2 = null;
 
     public RegistraEntregaDAO() {
-        arquivo1 = System.getenv("USERPROFILE") + "\\Documents\\PI\\deliveryControl\\src\\main\\java\\dados\\entregasRealizadasBD.txt";
-        arquivo2 = System.getenv("USERPROFILE") + "\\Documents\\PI\\deliveryControl\\src\\main\\java\\dados\\entregasCanceladasBD.txt";
+        arquivo1 = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\entregasRealizadasBD.txt";
+        arquivo2 = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\entregasCanceladasBD.txt";
     }
 
     @Override

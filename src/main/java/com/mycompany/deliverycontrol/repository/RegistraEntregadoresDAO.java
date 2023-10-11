@@ -9,6 +9,7 @@ import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.Veiculo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     private String nomeDoArquivo = null;
 
     public RegistraEntregadoresDAO() {
-        nomeDoArquivo = System.getenv("USERPROFILE") +  "\\Documents\\PI\\deliveryControl\\src\\main\\java\\dados\\entregadoresBD.txt";
+        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\entregadoresBD.txt";
     }
 
     @Override
