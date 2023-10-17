@@ -10,6 +10,8 @@ package com.mycompany.deliverycontrol.model;
  */
 public class Pedido {
     private Integer id = 0;
+    private Integer id_cliente = 0;
+    private Integer id_entregador = 0;
     private String nome = "";
     private String endereco = "";
     private String telefone = "";
@@ -17,13 +19,15 @@ public class Pedido {
     private String hrEntrega = "";
     private StatusPedidoENUM statusPedido = null;
 
-    public Pedido(Integer id, String nome, String endereco, String telefone, String observacao, String hrEntrega) {
+    public Pedido(Integer id, String nome, String endereco, String telefone, String observacao, String hrEntrega, Integer id_cliente, Integer id_entregador) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
         this.observacao = observacao;
         this.hrEntrega = hrEntrega;
+        this.id_cliente = id_cliente;
+        this.id_entregador = id_entregador;
     }
 
     @Override
@@ -33,7 +37,9 @@ public class Pedido {
                 ";" + endereco +
                 ";" + telefone +
                 ";" + observacao +
-                ";" + hrEntrega;
+                ";" + hrEntrega +
+                ";" + id_cliente +
+                ";" + id_entregador;
     }
 
     public Integer getId() {
@@ -95,6 +101,24 @@ public class Pedido {
     public StatusPedidoENUM getStatusPedido() {
         return statusPedido;
     }
+
+    public Integer getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(Integer id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public Integer getId_entregador() {
+        return id_entregador;
+    }
+
+    public void setId_entregador(Integer id_entregador) {
+        this.id_entregador = id_entregador;
+    }
+
+    
 
 }
 

@@ -19,7 +19,6 @@ import java.awt.event.*;
 public class JanelaEntregador extends JFrame {
     IRegistraEntregadoresCRUD entregadores = new RegistraEntregadoresControle();
     private JTextField idField, nomeField, telefoneField, cpfField, placaField, modeloField, corField, qntEntregasField;    
-    
     public JanelaEntregador() {
         // Configurações básicas do JFrame
         setTitle("Cadastro de Entregador");

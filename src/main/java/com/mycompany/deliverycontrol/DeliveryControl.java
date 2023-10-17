@@ -34,9 +34,9 @@ public class DeliveryControl {
         JanelaPrincipal janela = new JanelaPrincipal();
         janela.setVisible(true);
 
-        String url = "jdbc:mysql://localhost:3306/exercicio10";
+        String url = "jdbc:mysql://localhost:3306/DeliveryControl";
         String usuario = "root";
-        String senha = "Getin@dm";
+        String senha = "123456789";
 
         Connection conexao = null;
 
