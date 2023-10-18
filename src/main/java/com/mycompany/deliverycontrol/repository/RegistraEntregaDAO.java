@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
  */
 public class RegistraEntregaDAO implements IRegistraEntregaCRUD {
 
+    
     private String arquivo1 = null;
     private String arquivo2 = null;
 

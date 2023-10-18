@@ -26,14 +26,24 @@ import javax.swing.JOptionPane;
  */
 public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
+    Banco banco = Banco.getInstance();
     private String nomeDoArquivo = null;
 
     public RegistraEntregadoresDAO() {
+        
         nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\entregadoresBD.txt";
     }
 
     @Override
     public void incluir(Entregador entregador) throws Exception {
+        banco.conexao();
+        System.out.println(banco.toString());
+        if(banco.estaConectado()){
+            System.out.println("conectadooooooooooooo");
+        }else{
+            System.out.println("nao conectadooooooooooooo");
+        }
+        banco.insertEntregador(entregador);
         try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nomeDoArquivo, true))) {
             buffWrite.append(entregador.toString() + "\n");
             buffWrite.close();

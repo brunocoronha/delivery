@@ -5,34 +5,61 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.mycompany.deliverycontrol.model.Entregador;
+
 public class Banco {
-    Connection connection;
 
-    public void criaConexao() throws SQLException{
-            String user = "root";
-            String senha = "123456789";
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DeliveryControl", user, senha);
-            String sql = "INSERT INTO sua_tabela (coluna1, coluna2, coluna3) VALUES (?, ?, ?)";
+    private Banco() {
 
-            // Crie um PreparedStatement com a consulta SQL
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    }
+    private static Connection connection;
 
-            // Substitua os valores das colunas pelos valores reais que você deseja inserir
-            preparedStatement.setString(1, "valor_coluna1");
-            preparedStatement.setInt(2, 123);
-            preparedStatement.setString(3, "valor_coluna3");
+    private static Banco banco;
 
-            // Execute o INSERT
-            preparedStatement.executeUpdate();
+    public static Banco getInstance(){
+        if(banco == null){
+            banco = new Banco();
+        }
+        return banco;
+    }
 
-            
-            System.out.println("Inserção bem-sucedida.");
+    public void conexao() throws SQLException {
+        String user = "root";
+        String senha = "123456789";
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DeliveryControl", user, senha);      
+    }
 
-
+    public boolean estaConectado() throws SQLException{
+        if(connection.isClosed()){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public void fechaConexao() throws SQLException {
         connection.close();
+    }
+
+    public void insertEntregador(Entregador entregador) throws SQLException {
+
+
+        String sql = "INSERT INTO entregador (placa_veiculo, nome, telefone, cpf, quantidadeEntregas) VALUES (?, ?, ?, ?, ?)";
+
+
+        // Crie um PreparedStatement com a consulta SQL
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        // Substitua os valores das colunas pelos valores reais que você deseja inserir
+        preparedStatement.setString(1, entregador.getVeiculo().getPlaca());
+        preparedStatement.setString(2, entregador.getNome());
+        preparedStatement.setString(3, entregador.getTelefone());
+        preparedStatement.setString(4, entregador.getCpf());
+        preparedStatement.setInt(5, entregador.getQntEntregas());
+
+        // Execute o INSERT
+        preparedStatement.executeUpdate();
+        fechaConexao();
     }
 
 }

@@ -19,15 +19,15 @@ public class Pedido {
     private String hrEntrega = "";
     private StatusPedidoENUM statusPedido = null;
 
-    public Pedido(Integer id, String nome, String endereco, String telefone, String observacao, String hrEntrega, Integer id_cliente, Integer id_entregador) {
+    public Pedido(Integer id, String nome, String endereco, String telefone, String observacao, String hrEntrega) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
         this.observacao = observacao;
         this.hrEntrega = hrEntrega;
-        this.id_cliente = id_cliente;
-        this.id_entregador = id_entregador;
+        //this.id_cliente = id_cliente;
+        //this.id_entregador = id_entregador;
     }
 
     @Override
@@ -37,9 +37,9 @@ public class Pedido {
                 ";" + endereco +
                 ";" + telefone +
                 ";" + observacao +
-                ";" + hrEntrega +
-                ";" + id_cliente +
-                ";" + id_entregador;
+                ";" + hrEntrega;// +
+                //";" + id_cliente +
+                //";" + id_entregador;
     }
 
     public Integer getId() {

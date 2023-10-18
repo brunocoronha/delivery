@@ -10,6 +10,7 @@ package com.mycompany.deliverycontrol.view;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,8 +44,15 @@ public class JanelaPrincipal extends JFrame {
         botaoEntregador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JanelaEntregador janelaEntregador = new JanelaEntregador();
-                janelaEntregador.setVisible(true);
+                JanelaEntregador janelaEntregador;
+                try {
+                    janelaEntregador = new JanelaEntregador();
+                    janelaEntregador.setVisible(true);
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                
             }
         });
 

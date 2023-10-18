@@ -12,14 +12,18 @@ import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.controller.RegistraEntregadoresControle;
 import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.Veiculo;
+import com.mycompany.deliverycontrol.repository.Banco;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 public class JanelaEntregador extends JFrame {
     IRegistraEntregadoresCRUD entregadores = new RegistraEntregadoresControle();
+    Banco banco = Banco.getInstance();
     private JTextField idField, nomeField, telefoneField, cpfField, placaField, modeloField, corField, qntEntregasField;    
-    public JanelaEntregador() {
+    public JanelaEntregador() throws SQLException {
         // Configurações básicas do JFrame
         setTitle("Cadastro de Entregador");
         setSize(800, 600);
@@ -27,6 +31,10 @@ public class JanelaEntregador extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false); // Impede o redimensionamento da janela
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        
+        
+        
         // Criação dos componentes JLabel e JTextField
         JLabel idLabel = new JLabel("ID:");
         idField = new JTextField(10);
