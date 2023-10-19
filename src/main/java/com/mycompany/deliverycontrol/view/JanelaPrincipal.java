@@ -26,10 +26,12 @@ public class JanelaPrincipal extends JFrame {
 
         JButton botaoPedido = new JButton("Pedido");
         JButton botaoEntregador = new JButton("Entregador");
+        JButton botaoCliente = new JButton("Cliente");
 
-        JPanel painel = new JPanel(new GridLayout(2, 1));
+        JPanel painel = new JPanel(new GridLayout(3, 1));
         painel.add(botaoPedido);
         painel.add(botaoEntregador);
+        painel.add(botaoCliente);
         add(painel);
 
         botaoPedido.addActionListener(new ActionListener() {
@@ -56,5 +58,18 @@ public class JanelaPrincipal extends JFrame {
             }
         });
 
+        
+        botaoCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JanelaCliente janelaCliente;
+                janelaCliente = new JanelaCliente();
+                janelaCliente.setVisible(true);
+                
+            }
+        });
+
     }
+
+
 }

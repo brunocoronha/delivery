@@ -1,12 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.deliverycontrol.repository;
 
-import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
-import com.mycompany.deliverycontrol.model.Entregador;
-import com.mycompany.deliverycontrol.model.Veiculo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,35 +12,33 @@ import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author brunocoronha.adm
- */
-public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
+import com.mycompany.deliverycontrol.CRUD.IRegistraClienteCRUD;
+import com.mycompany.deliverycontrol.model.Cliente;
+
+public class RegistraClienteDAO implements IRegistraClienteCRUD{
 
     Banco banco = Banco.getInstance();
     private String nomeDoArquivo = null;
 
-    public RegistraEntregadoresDAO() {
+    public RegistraClienteDAO() {
         
-        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\entregadoresBD.txt";
+        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\ClienteBD.txt";
     }
 
     @Override
-    public void incluir(Entregador entregador) throws Exception, SQLException {
+    public void incluir(Cliente cliente) throws Exception, SQLException {
         banco.conexao();
         if(banco.estaConectado()){
             System.out.println("conectadooooooooooooo");
+            banco.insertCliente(cliente);
         }else{
             System.out.println("nao conectadooooooooooooo");
-        }
-
-        banco.insertVeiculo(new Veiculo("OGH0140", "Titan", "Azul"));
-        banco.insertEntregador(entregador);
+        }        
         try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nomeDoArquivo, true))) {
-            buffWrite.append(entregador.toString() + "\n");
+            buffWrite.append(cliente.toString() + "\n");
             buffWrite.close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -56,19 +47,19 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     }
 
     @Override
-    public void alterar(Entregador entregador) throws Exception {
+    public void alterar(Cliente cliente) throws Exception {
         int novaLinha = 0; // linha que será alterada
-        boolean entregadorEncontrado = false;
+        boolean clienteEncontrado = false;
         try {
             FileReader fr = new FileReader(nomeDoArquivo);
             try (BufferedReader br = new BufferedReader(fr)) {
                 String linha = "";
                 while ((linha = br.readLine()) != null) {
                     String[] dados = linha.split(";");
-                    if (entregador.getId().equals(Integer.valueOf(dados[0]))) {
+                    if (cliente.getNome().equals(Integer.valueOf(dados[0]))) {
                         System.out.println("Encontrou");
-                        entregadorEncontrado = true;
-                        break; // Caso encontre o entregador o laço é parado
+                        clienteEncontrado = true;
+                        break; // Caso encontre o Cliente o laço é parado
                     } else {
                         novaLinha++; //
                     }
@@ -78,28 +69,29 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
         } catch (IOException e) {
             throw new Exception("Não foi possível abrir o arquivo");
         }
-        if (entregadorEncontrado) {
+        if (clienteEncontrado) {
             try {
                 Path arquivoPath = Path.of(nomeDoArquivo);
                 List<String> linhas = Files.readAllLines(arquivoPath, StandardCharsets.UTF_8);
-                linhas.set(novaLinha, entregador.toString()); // Altera a linha desejada
+                linhas.set(novaLinha, cliente.toString()); // Altera a linha desejada
                 Files.write(arquivoPath, linhas, StandardCharsets.UTF_8);
             } catch (IOException e) {
                 throw new Exception("Não foi possível alterar o arquivo");
             }
         } else {
-            System.out.println("Entregador não encontrado");
+            System.out.println("Cliente não encontrado");
         }
 
     }
 
     @Override
-    public ArrayList<Entregador> listagemDeEntregador() throws Exception {
+    public ArrayList<Cliente> listagemDeCliente() throws Exception {
         return null;
     }
 
     @Override
-    public Entregador consultar(Integer id) throws Exception {
+    public Cliente consultar(Integer id) throws Exception {
+        /* 
         try {
             FileReader fr = new FileReader(nomeDoArquivo);
             try (BufferedReader br = new BufferedReader(fr)) {
@@ -107,14 +99,14 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
                 while ((linha = br.readLine()) != null) {
                     String[] dados = linha.split(";");
                     if (id.equals(Integer.valueOf(dados[0]))) {
-                        Entregador entregador = new Entregador(
+                        Cliente Cliente = new Cliente(
                                 Integer.valueOf(dados[0]),
                                 dados[1],
                                 dados[2],
                                 dados[3],
                                 new Veiculo(dados[4], dados[5], dados[6]),
                                 Integer.parseInt(dados[7]));
-                        return entregador;
+                        return Cliente;
                     }
                 }
                 br.close();
@@ -123,5 +115,9 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
         } catch (IOException e) {
             throw new Exception("Não foi possível abrir o arquivo");
         }
+    */
+    return null;
     }
+    
+    
 }
