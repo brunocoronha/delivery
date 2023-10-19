@@ -11,7 +11,13 @@ package com.mycompany.deliverycontrol.model;
 public abstract class Entrega {
     private String nomeEntregador;
     private String hrEntrega;
-    private Integer id;
+    private Integer id;    
+
+    public Entrega(String nomeEntregador, String hrEntrega, Integer id) {
+        this.nomeEntregador = nomeEntregador;
+        this.hrEntrega = hrEntrega;
+        this.id = id;
+    }
 
     public Entrega(Pedido pedido, Entregador entregador){
         nomeEntregador = entregador.getNome();

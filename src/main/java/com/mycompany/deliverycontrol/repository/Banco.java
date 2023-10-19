@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
@@ -44,7 +46,8 @@ public class Banco {
     }
 
     public void insertEntregador(Entregador entregador) throws SQLException {
-        String sql = "INSERT INTO entregador (placa_veiculo, nome, telefone, cpf, quantidadeEntregas) VALUES (?, ?, ?)";
+        System.out.println(entregador.toString());
+        String sql = "INSERT INTO entregador (nome, telefone, cpf) VALUES (?, ?, ?)";
         // Crie um PreparedStatement com a consulta SQL
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         // Substitua os valores das colunas pelos valores reais que você deseja inserir
@@ -54,6 +57,15 @@ public class Banco {
         // Execute o INSERT
         preparedStatement.executeUpdate();
         // fechaConexao();
+    }
+
+    public void removeEntregador(Integer id) throws SQLException {
+        System.out.println("entrou no método removeEntregador");
+        String sql = "DELETE FROM entregador WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        System.out.println(sql);
+        preparedStatement.executeUpdate();
     }
 
     /*

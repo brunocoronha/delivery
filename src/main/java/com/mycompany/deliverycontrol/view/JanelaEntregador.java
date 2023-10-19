@@ -21,17 +21,15 @@ import java.sql.SQLException;
 public class JanelaEntregador extends JFrame {
     IRegistraEntregadoresCRUD entregadores = new RegistraEntregadoresControle();
     Banco banco = Banco.getInstance();
-    private JTextField nomeField, telefoneField, cpfField, placaField, modeloField, corField, qntEntregasField;    
+    private JTextField nomeField, telefoneField, cpfField;    
     public JanelaEntregador() throws SQLException {
-        // Configurações básicas do JFrame
+        // Configurações básicas do JFrame        
         setTitle("Cadastro de Entregador");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false); // Impede o redimensionamento da janela
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
         
         
         // Criação dos componentes JLabel e JTextFielfd
@@ -42,19 +40,7 @@ public class JanelaEntregador extends JFrame {
         telefoneField = new JTextField(15);
 
         JLabel cpfLabel = new JLabel("CPF:");
-        cpfField = new JTextField(11);
-
-        JLabel placaLabel = new JLabel("Placa:");
-        placaField = new JTextField(8);
-
-        JLabel modeloLabel = new JLabel("Modelo:");
-        modeloField = new JTextField(20);
-
-        JLabel corLabel = new JLabel("Cor:");
-        corField = new JTextField(15);
-
-        JLabel qntEntregasLabel = new JLabel("Quantidade de Entregas:");
-        qntEntregasField = new JTextField(5);
+        cpfField = new JTextField(11);       
 
         // Criação dos botões
         JButton registrarButton = new JButton("Registrar");
@@ -86,35 +72,7 @@ public class JanelaEntregador extends JFrame {
         panel.add(cpfLabel, gbc);
 
         gbc.gridx = 1;
-        panel.add(cpfField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        panel.add(placaLabel, gbc);
-
-        gbc.gridx = 1;
-        panel.add(placaField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        panel.add(modeloLabel, gbc);
-
-        gbc.gridx = 1;
-        panel.add(modeloField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        panel.add(corLabel, gbc);
-
-        gbc.gridx = 1;
-        panel.add(corField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        panel.add(qntEntregasLabel, gbc);
-
-        gbc.gridx = 1;
-        panel.add(qntEntregasField, gbc);
+        panel.add(cpfField, gbc);        
 
         gbc.gridx = 0;
         gbc.gridy = 8;
@@ -138,10 +96,13 @@ public class JanelaEntregador extends JFrame {
                 // Registra um novo Entregador               
                 String nome = nomeField.getText();
                 String telefone = telefoneField.getText();
-                String cpf = cpfField.getName();
+                String cpf = cpfField.getText();
                 Entregador entregador = new Entregador(nome, telefone, cpf);
                 try {
                     entregadores.incluir(entregador);
+                    banco.conexao();
+                    banco.removeEntregador(6);
+                    banco.fechaConexao();
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -157,10 +118,6 @@ public class JanelaEntregador extends JFrame {
                 nomeField.setText("");
                 telefoneField.setText("");
                 cpfField.setText("");
-                placaField.setText("");
-                modeloField.setText("");
-                corField.setText("");
-                qntEntregasField.setText("");
             }
         });
 

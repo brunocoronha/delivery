@@ -14,6 +14,15 @@ public class Entregador {
     private String telefone = "";
     private String cpf = "";
     private boolean statusEntregador = false;
+    
+
+    public Entregador(Integer id, String nome, String telefone, String cpf, boolean statusEntregador) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.cpf = cpf;
+        this.statusEntregador = statusEntregador;
+    }
 
     public Entregador(String nome, String telefone, String cpf) {
         this.nome = nome;
