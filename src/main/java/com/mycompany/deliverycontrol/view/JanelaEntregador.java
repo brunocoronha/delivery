@@ -11,7 +11,6 @@ package com.mycompany.deliverycontrol.view;
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.controller.RegistraEntregadoresControle;
 import com.mycompany.deliverycontrol.model.Entregador;
-import com.mycompany.deliverycontrol.model.Veiculo;
 import com.mycompany.deliverycontrol.repository.Banco;
 
 import javax.swing.*;
@@ -22,7 +21,7 @@ import java.sql.SQLException;
 public class JanelaEntregador extends JFrame {
     IRegistraEntregadoresCRUD entregadores = new RegistraEntregadoresControle();
     Banco banco = Banco.getInstance();
-    private JTextField idField, nomeField, telefoneField, cpfField, placaField, modeloField, corField, qntEntregasField;    
+    private JTextField nomeField, telefoneField, cpfField, placaField, modeloField, corField, qntEntregasField;    
     public JanelaEntregador() throws SQLException {
         // Configurações básicas do JFrame
         setTitle("Cadastro de Entregador");
@@ -35,10 +34,7 @@ public class JanelaEntregador extends JFrame {
         
         
         
-        // Criação dos componentes JLabel e JTextField
-        JLabel idLabel = new JLabel("ID:");
-        idField = new JTextField(10);
-
+        // Criação dos componentes JLabel e JTextFielfd
         JLabel nomeLabel = new JLabel("Nome:");
         nomeField = new JTextField(20);
 
@@ -70,13 +66,6 @@ public class JanelaEntregador extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(idLabel, gbc);
-
-        gbc.gridx = 1;
-        panel.add(idField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -146,17 +135,11 @@ public class JanelaEntregador extends JFrame {
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Registra um novo Entregador
-                Integer id = Integer.valueOf(idField.getText());
+                // Registra um novo Entregador               
                 String nome = nomeField.getText();
                 String telefone = telefoneField.getText();
                 String cpf = cpfField.getName();
-                String placa = placaField.getText();
-                String modelo = modeloField.getText();
-                String cor = corField.getText();
-                Integer qtdEntrega = Integer.parseInt(qntEntregasField.getText());
-                Veiculo veiculo = new Veiculo(placa, modelo, cor);
-                Entregador entregador = new Entregador(id, nome, telefone, cpf, veiculo, qtdEntrega);
+                Entregador entregador = new Entregador(nome, telefone, cpf);
                 try {
                     entregadores.incluir(entregador);
                 } catch (Exception e1) {
@@ -170,8 +153,7 @@ public class JanelaEntregador extends JFrame {
         limparButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Limpa todos os campos de texto
-                idField.setText("");
+                // Limpa todos os campos de texto                
                 nomeField.setText("");
                 telefoneField.setText("");
                 cpfField.setText("");

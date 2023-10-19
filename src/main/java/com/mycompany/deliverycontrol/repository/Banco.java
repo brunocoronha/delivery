@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
-import com.mycompany.deliverycontrol.model.Veiculo;
 
 public class Banco {
 
@@ -45,34 +44,35 @@ public class Banco {
     }
 
     public void insertEntregador(Entregador entregador) throws SQLException {
-        String sql = "INSERT INTO entregador (placa_veiculo, nome, telefone, cpf, quantidadeEntregas) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO entregador (placa_veiculo, nome, telefone, cpf, quantidadeEntregas) VALUES (?, ?, ?)";
         // Crie um PreparedStatement com a consulta SQL
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         // Substitua os valores das colunas pelos valores reais que você deseja inserir
-        preparedStatement.setString(1, entregador.getVeiculo().getPlaca());
-        preparedStatement.setString(2, entregador.getNome());
-        preparedStatement.setString(3, entregador.getTelefone());
-        preparedStatement.setString(4, entregador.getCpf());
-        preparedStatement.setInt(5, entregador.getQntEntregas());
+        preparedStatement.setString(1, entregador.getNome());
+        preparedStatement.setString(2, entregador.getTelefone());
+        preparedStatement.setString(3, entregador.getCpf());
         // Execute o INSERT
         preparedStatement.executeUpdate();
-        //fechaConexao();
+        // fechaConexao();
     }
 
-    public void insertVeiculo(Veiculo veiculo) throws SQLException {
-        String sql = "INSERT INTO veiculo (placa, modelo, cor) VALUES (?, ?, ?)";
-        // Crie um PreparedStatement com a consulta SQL
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        // Substitua os valores das colunas pelos valores reais que você deseja inserir
-        preparedStatement.setString(1, veiculo.getPlaca());
-        preparedStatement.setString(2, veiculo.getModelo());
-        preparedStatement.setString(3, veiculo.getCor());
-        // Execute o INSERT
-        preparedStatement.executeUpdate();
-        //fechaConexao();
-    }
+    /*
+     * public void insertVeiculo(Veiculo veiculo) throws SQLException {
+     * String sql = "INSERT INTO veiculo (placa, modelo, cor) VALUES (?, ?, ?)";
+     * // Crie um PreparedStatement com a consulta SQL
+     * PreparedStatement preparedStatement = connection.prepareStatement(sql);
+     * // Substitua os valores das colunas pelos valores reais que você deseja
+     * inserir
+     * preparedStatement.setString(1, veiculo.getPlaca());
+     * preparedStatement.setString(2, veiculo.getModelo());
+     * preparedStatement.setString(3, veiculo.getCor());
+     * // Execute o INSERT
+     * preparedStatement.executeUpdate();
+     * //fechaConexao();
+     * }
+     */
 
-        public void insertCliente(Cliente cliente) throws SQLException {
+    public void insertCliente(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, endereco, telefone) VALUES (?, ?, ?)";
         // Crie um PreparedStatement com a consulta SQL
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -82,7 +82,7 @@ public class Banco {
         preparedStatement.setString(3, cliente.getTelefone());
         // Execute o INSERT
         preparedStatement.executeUpdate();
-        //fechaConexao();
+        // fechaConexao();
     }
 
 }

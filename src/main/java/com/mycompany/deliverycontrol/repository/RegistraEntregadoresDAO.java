@@ -6,7 +6,6 @@ package com.mycompany.deliverycontrol.repository;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.model.Entregador;
-import com.mycompany.deliverycontrol.model.Veiculo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,12 +39,11 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
         banco.conexao();
         if(banco.estaConectado()){
             System.out.println("conectadooooooooooooo");
+            banco.insertEntregador(entregador);
         }else{
             System.out.println("nao conectadooooooooooooo");
         }
-
-        banco.insertVeiculo(new Veiculo("OGH0140", "Titan", "Azul"));
-        banco.insertEntregador(entregador);
+        
         try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nomeDoArquivo, true))) {
             buffWrite.append(entregador.toString() + "\n");
             buffWrite.close();
@@ -108,12 +106,9 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
                     String[] dados = linha.split(";");
                     if (id.equals(Integer.valueOf(dados[0]))) {
                         Entregador entregador = new Entregador(
-                                Integer.valueOf(dados[0]),
+                                dados[0],
                                 dados[1],
-                                dados[2],
-                                dados[3],
-                                new Veiculo(dados[4], dados[5], dados[6]),
-                                Integer.parseInt(dados[7]));
+                                dados[2]);                              
                         return entregador;
                     }
                 }

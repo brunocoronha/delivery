@@ -13,17 +13,12 @@ public class Entregador {
     private String nome = "";
     private String telefone = "";
     private String cpf = "";
-    private Veiculo veiculo;
-    private int qntEntregas = 0;
     private boolean statusEntregador = false;
 
-    public Entregador(Integer id, String nome, String telefone, String cpf, Veiculo veiculo, int qntEntregas) {
-        this.id = id;
+    public Entregador(String nome, String telefone, String cpf) {
         this.nome = nome;
         this.telefone = telefone;
         this.cpf = cpf;
-        this.veiculo = veiculo;
-        this.qntEntregas = qntEntregas;
     }
 
     @Override
@@ -31,9 +26,7 @@ public class Entregador {
         return id + ";" +
                 nome + ";" +
                 telefone + ";" +
-                cpf + ";" +
-                veiculo.toString() + ";" +
-                qntEntregas;
+                cpf + ";";
     }
 
     // #region Getter e Setter
@@ -51,14 +44,6 @@ public class Entregador {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getQntEntregas() {
-        return qntEntregas;
-    }
-
-    public void setQntEntregas(int qntEntregas) {
-        this.qntEntregas = qntEntregas;
     }
 
     public String getTelefone() {
@@ -84,14 +69,5 @@ public class Entregador {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
-
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
-    }
-
     // #endregion
 }
