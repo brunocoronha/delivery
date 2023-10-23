@@ -96,12 +96,14 @@ public class JanelaEntregador extends JFrame {
                 // Registra um novo Entregador               
                 String nome = nomeField.getText();
                 String telefone = telefoneField.getText();
-                String cpf = cpfField.getText();
-                Entregador entregador = new Entregador(nome, telefone, cpf);
+                Entregador entregador = new Entregador(nome,telefone);
                 try {
                     entregadores.incluir(entregador);
                     banco.conexao();
-                    banco.removeEntregador(6);
+                    //banco.removeEntregador(6);
+                    for(Entregador i : banco.buscaEntregadores()){
+                        System.out.println(i.toString());
+                    }
                     banco.fechaConexao();
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block

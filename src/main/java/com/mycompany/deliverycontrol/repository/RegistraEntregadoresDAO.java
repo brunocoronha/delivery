@@ -7,10 +7,8 @@ package com.mycompany.deliverycontrol.repository;
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.model.Entregador;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -18,7 +16,6 @@ import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,27 +27,25 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     private String nomeDoArquivo = null;
 
     public RegistraEntregadoresDAO() {
-        
-        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\entregadoresBD.txt";
+        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator
+                + "dadosDelivey\\entregadoresBD.txt";
     }
 
     @Override
-    public void incluir(Entregador entregador) throws Exception, SQLException {
-        banco.conexao();
-        if(banco.estaConectado()){
-            System.out.println("conectadooooooooooooo");
-            banco.insertEntregador(entregador);
-        }else{
-            System.out.println("nao conectadooooooooooooo");
-        }
-        
-        try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nomeDoArquivo, true))) {
-            buffWrite.append(entregador.toString() + "\n");
-            buffWrite.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        banco.fechaConexao();
+    public void incluir(Entregador entregador) {
+        try {
+            banco.conexao();
+            if (banco.estaConectado()) {
+                System.out.println("conectado");
+                banco.insertEntregador(entregador);
+            } else {
+                System.out.println("nao conectado");
+            }
+            banco.fechaConexao();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }        
     }
 
     @Override
@@ -98,25 +93,6 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     @Override
     public Entregador consultar(Integer id) throws Exception {
-        try {
-            FileReader fr = new FileReader(nomeDoArquivo);
-            try (BufferedReader br = new BufferedReader(fr)) {
-                String linha = "";
-                while ((linha = br.readLine()) != null) {
-                    String[] dados = linha.split(";");
-                    if (id.equals(Integer.valueOf(dados[0]))) {
-                        Entregador entregador = new Entregador(
-                                dados[0],
-                                dados[1],
-                                dados[2]);                              
-                        return entregador;
-                    }
-                }
-                br.close();
-            }
-            return null;
-        } catch (IOException e) {
-            throw new Exception("Não foi possível abrir o arquivo");
-        }
+        return null;
     }
 }

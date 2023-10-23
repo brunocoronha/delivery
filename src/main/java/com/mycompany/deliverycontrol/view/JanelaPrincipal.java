@@ -46,15 +46,10 @@ public class JanelaPrincipal extends JFrame {
         botaoEntregador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JanelaEntregador janelaEntregador;
-                try {
-                    janelaEntregador = new JanelaEntregador();
-                    janelaEntregador.setVisible(true);
-                } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-                
+                TelaCadastroEntregador janelaEntregador;
+                janelaEntregador = new TelaCadastroEntregador();
+                janelaEntregador.setVisible(true);
+                janelaEntregador.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
 

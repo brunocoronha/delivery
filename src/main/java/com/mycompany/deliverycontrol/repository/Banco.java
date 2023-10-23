@@ -3,10 +3,12 @@ package com.mycompany.deliverycontrol.repository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-
+import com.google.protobuf.DescriptorProtos.EnumDescriptorProto.EnumReservedRange;
 import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
 
@@ -47,43 +49,67 @@ public class Banco {
 
     public void insertEntregador(Entregador entregador) throws SQLException {
         System.out.println(entregador.toString());
-        String sql = "INSERT INTO entregador (nome, telefone, cpf) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO entregador (nome, telefone) VALUES (?, ?)";
         // Crie um PreparedStatement com a consulta SQL
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         // Substitua os valores das colunas pelos valores reais que você deseja inserir
         preparedStatement.setString(1, entregador.getNome());
         preparedStatement.setString(2, entregador.getTelefone());
-        preparedStatement.setString(3, entregador.getCpf());
         // Execute o INSERT
         preparedStatement.executeUpdate();
         // fechaConexao();
     }
 
-    public void removeEntregador(Integer id) throws SQLException {
+    public boolean removeEntregador(Integer id) throws SQLException {
         System.out.println("entrou no método removeEntregador");
         String sql = "DELETE FROM entregador WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         System.out.println(sql);
-        preparedStatement.executeUpdate();
+        if(preparedStatement.executeUpdate() < 1){
+            return false;
+        }
+        return true;
     }
 
-    /*
-     * public void insertVeiculo(Veiculo veiculo) throws SQLException {
-     * String sql = "INSERT INTO veiculo (placa, modelo, cor) VALUES (?, ?, ?)";
-     * // Crie um PreparedStatement com a consulta SQL
-     * PreparedStatement preparedStatement = connection.prepareStatement(sql);
-     * // Substitua os valores das colunas pelos valores reais que você deseja
-     * inserir
-     * preparedStatement.setString(1, veiculo.getPlaca());
-     * preparedStatement.setString(2, veiculo.getModelo());
-     * preparedStatement.setString(3, veiculo.getCor());
-     * // Execute o INSERT
-     * preparedStatement.executeUpdate();
-     * //fechaConexao();
-     * }
-     */
+    public ArrayList<Entregador> buscaEntregadores() throws SQLException {
+        ArrayList<Entregador> entregadores = new ArrayList<>();
+        String sql = "SELECT * FROM entregador";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            Integer id = resultSet.getInt("id");
+            String nome = resultSet.getString("nome");
+            String telefone = resultSet.getString("telefone");
+            Entregador entregador = new Entregador(id, nome, telefone);
+            entregadores.add(entregador);
+        }
+        return entregadores;
+    }
 
+    public boolean updateEntregador(Entregador entregador) throws SQLException{
+        String sql = "UPDATE entregador SET nome = ?, telefone = ? WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, entregador.getNome());
+        preparedStatement.setString(2, entregador.getTelefone());
+        preparedStatement.setInt(3, entregador.getId());
+        if(preparedStatement.executeUpdate() < 1){
+            return false;
+        }
+        return true;
+    }
+
+    public Entregador buscaEntregador(Integer id) throws SQLException{
+        String sql = "SELECT * FROM entregador WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        ResultSet resultset = preparedStatement.executeQuery();
+        int idEntregador = resultset.getInt("id");
+        String nomeEntregador = resultset.getString("nome");
+        String telefoneEntregador = resultset.getString("telefone");
+        return new Entregador(idEntregador, nomeEntregador, telefoneEntregador);
+    }
+    
     public void insertCliente(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, endereco, telefone) VALUES (?, ?, ?)";
         // Crie um PreparedStatement com a consulta SQL
