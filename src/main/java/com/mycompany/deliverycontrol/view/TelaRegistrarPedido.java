@@ -54,7 +54,7 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 178, 0));
         jLabel1.setText("Registrar Pedido");
 
-        //jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo delivery pequeno.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("..\\icons\\pedido.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
