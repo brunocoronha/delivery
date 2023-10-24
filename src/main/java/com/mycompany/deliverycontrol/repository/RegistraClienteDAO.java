@@ -1,10 +1,8 @@
 package com.mycompany.deliverycontrol.repository;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -31,15 +29,15 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
 
     @Override
     public void incluir(Cliente cliente) {
-        try {
-            banco.conexao();
+        try {            
             if (!banco.estaConectado()) {
+                banco.conexao();
                 System.out.println("conectadooooooooooooo");
                 banco.insertCliente(cliente);
+                banco.fechaConexao();
             } else {
                 System.out.println("nao conectadooooooooooooo");
-            }
-            banco.fechaConexao();
+            }            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Erro ao conectar no banco");
             e.printStackTrace();
@@ -85,7 +83,7 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
     }
 
     @Override
-    public ArrayList<Cliente> listagemDeCliente(){
+    public ArrayList<Cliente> listagemDeCliente() throws Exception{
         ArrayList<Cliente> listaClientes = null;
         try {
             banco.conexao();

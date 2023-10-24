@@ -80,14 +80,19 @@ public class Banco {
     }
 
     public Entregador buscaEntregador(Integer id) throws SQLException {
-        String sql = "SELECT * FROM entregador WHERE id = ?";
+        String sql = "SELECT id, nome, telefone FROM entregador WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultset = preparedStatement.executeQuery();
-        int idEntregador = resultset.getInt("id");
-        String nomeEntregador = resultset.getString("nome");
-        String telefoneEntregador = resultset.getString("telefone");
-        return new Entregador(idEntregador, nomeEntregador, telefoneEntregador);
+        if (resultset.next()) {
+            int idEntregador = resultset.getInt("id");
+            String nomeEntregador = resultset.getString("nome");
+            String telefoneEntregador = resultset.getString("telefone");
+            Entregador entregador = new Entregador(idEntregador, nomeEntregador, telefoneEntregador);
+            return entregador;
+        }
+        return null;
+
     }
 
     public boolean updateEntregador(Entregador entregador) throws SQLException {
@@ -104,7 +109,7 @@ public class Banco {
 
     // #endregion
 
-    //#region CRUD_CLIENTE
+    // #region CRUD_CLIENTE
 
     public void insertCliente(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, endereco, telefone) VALUES (?, ?, ?)";
@@ -147,11 +152,14 @@ public class Banco {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultset = preparedStatement.executeQuery();
-        int idCliente = resultset.getInt("id");
-        String nomeCliente = resultset.getString("nome");
-        String enderecoCLiente = resultset.getString("endereco");
-        String telefoneCliente = resultset.getString("telefone");
-        return new Cliente(idCliente, nomeCliente, enderecoCLiente, telefoneCliente);
+        if (resultset.next()) {
+            int idCliente = resultset.getInt("id");
+            String nomeCliente = resultset.getString("nome");
+            String enderecoCLiente = resultset.getString("endereco");
+            String telefoneCliente = resultset.getString("telefone");
+            return new Cliente(idCliente, nomeCliente, enderecoCLiente, telefoneCliente);
+        }
+        return null;
     }
 
     public boolean updateCliente(Cliente cliente) throws SQLException {
@@ -167,5 +175,5 @@ public class Banco {
         return true;
     }
 
-    //#endregion
+    // #endregion
 }

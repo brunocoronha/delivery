@@ -5,6 +5,7 @@
 package com.mycompany.deliverycontrol.repository;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
+import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,10 +39,10 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
             if (!banco.estaConectado()) {
                 System.out.println("conectado");
                 banco.insertEntregador(entregador);
+                banco.fechaConexao();
             } else {
                 System.out.println("nao conectado");
             }
-            banco.fechaConexao();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -87,22 +88,14 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     }
 
     @Override
-    public ArrayList<Entregador> listagemDeEntregador(){
+    public ArrayList<Entregador> listagemDeEntregador() throws Exception {
         try {
-            ArrayList<Entregador> listaEntregadores = null;;
-
-            if (!banco.estaConectado()) {
-                banco.conexao();
-                System.out.println("conectado listagem");
-                listaEntregadores = banco.buscaEntregadores();
-            } else {
-                System.out.println("nao conectado listagem");
-            }
+            banco.conexao();
+            ArrayList<Entregador> listaEntregadores = null;
+            System.out.println("conectado listagem");
+            banco.conexao();
+            listaEntregadores = banco.buscaEntregadores();
             banco.fechaConexao();
-
-            /* for (Entregador e : listaEntregadores) {
-                System.out.println(e.toString());
-            } */
             return listaEntregadores;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -113,6 +106,18 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     @Override
     public Entregador consultar(Integer id) throws Exception {
+        try {            
+            banco.conexao();
+            System.out.println("consulta direta " + banco.buscaEntregador(17));
+            Entregador entregador = null;
+            System.out.println("conectado consulta");
+            entregador = banco.buscaEntregador(id);
+            banco.fechaConexao();
+            return entregador;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return null;
     }
 }
