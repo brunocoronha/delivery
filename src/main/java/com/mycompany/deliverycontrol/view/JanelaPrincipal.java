@@ -10,7 +10,6 @@ package com.mycompany.deliverycontrol.view;
  */
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

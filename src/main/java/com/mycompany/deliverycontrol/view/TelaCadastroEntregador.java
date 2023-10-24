@@ -4,7 +4,6 @@
  */
 package com.mycompany.deliverycontrol.view;
 
-import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
