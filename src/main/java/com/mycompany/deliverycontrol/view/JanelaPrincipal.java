@@ -47,8 +47,11 @@ public class JanelaPrincipal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 TelaCadastroEntregador janelaEntregador;
                 janelaEntregador = new TelaCadastroEntregador();
+                janelaEntregador.setTitle("Cadastro de entregador");
                 janelaEntregador.setVisible(true);
                 janelaEntregador.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                janelaEntregador.setResizable(false);
+                janelaEntregador.setLocationRelativeTo(null);
             }
         });
 

@@ -35,7 +35,7 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     public void incluir(Entregador entregador) {
         try {
             banco.conexao();
-            if (banco.estaConectado()) {
+            if (!banco.estaConectado()) {
                 System.out.println("conectado");
                 banco.insertEntregador(entregador);
             } else {
@@ -91,16 +91,18 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
         try {
             ArrayList<Entregador> listaEntregadores = null;;
             banco.conexao();
-            if (banco.estaConectado()) {
+            if (!banco.estaConectado()) {
                 System.out.println("conectado listagem");
                 listaEntregadores = banco.buscaEntregadores();
             } else {
                 System.out.println("nao conectado listagem");
             }
             banco.fechaConexao();
-            for (Entregador e : listaEntregadores) {
+
+            /* for (Entregador e : listaEntregadores) {
                 System.out.println(e.toString());
-            }
+            } */
+
             return listaEntregadores;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
