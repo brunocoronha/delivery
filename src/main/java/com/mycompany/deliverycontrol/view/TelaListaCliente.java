@@ -43,7 +43,7 @@ public class TelaListaCliente extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 178, 0));
         jLabel1.setText("Lista de Clientes");
 
-        //jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo delivery pequeno.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("..\\icons\\cliente.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -70,13 +70,13 @@ public class TelaListaCliente extends javax.swing.JFrame {
 
         jTable_ListaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nome", "Endereco", "Telefone"
+                "ID", "Nome", "Endereco", "Telefone"
             }
         ));
         jScrollPane1.setViewportView(jTable_ListaCliente);

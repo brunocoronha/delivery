@@ -38,7 +38,7 @@ public class JanelaPrincipal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JanelaPedido janelaPedido = new JanelaPedido();
                 janelaPedido.setVisible(true);
-                
+                janelaPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
 
