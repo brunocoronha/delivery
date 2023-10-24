@@ -32,8 +32,12 @@ public class RegistraClienteControle implements IRegistraClienteCRUD{
 
     @Override
     public Cliente consultar(Integer id) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consultar'");
+        return registraClientePersistencia.consultar(id);
+    }
+
+    @Override
+    public boolean deletar(Integer id) throws Exception {
+        return registraClientePersistencia.deletar(id);
     }
     
 }

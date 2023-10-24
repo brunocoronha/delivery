@@ -9,26 +9,26 @@ import com.mycompany.deliverycontrol.model.Entregador;
 
 public class PreencheTabelas {
 
-    public static void preencherTabelaEntregadores(DefaultTableModel modelo, ArrayList<Entregador> entregadores){
+    public static void preencherTabelaEntregadores(DefaultTableModel modelo, ArrayList<Entregador> entregadores) {
         modelo.setNumRows(0);
-        if(entregadores.isEmpty()){
+        if (entregadores.isEmpty()) {
             return;
         }
-        for(Entregador e : entregadores){
+        for (Entregador e : entregadores) {
             Object[] obj = e.toString().split(";");
             modelo.addRow(obj);
         }
     }
 
-    public static void preencherTabelaClientes(DefaultTableModel modelo, ArrayList<Cliente> clientes){
+    public static void preencherTabelaClientes(DefaultTableModel modelo, ArrayList<Cliente> clientes) {
         modelo.setNumRows(0);
-        if(clientes.isEmpty()){
+        if (clientes.isEmpty()) {
             return;
         }
-        for(Cliente e : clientes){
+        for (Cliente e : clientes) {
             Object[] obj = e.toString().split(";");
             modelo.addRow(obj);
         }
     }
-    
+
 }

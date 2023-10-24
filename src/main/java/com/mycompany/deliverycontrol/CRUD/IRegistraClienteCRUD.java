@@ -14,4 +14,6 @@ public interface IRegistraClienteCRUD {
 
     public Cliente consultar(Integer id) throws Exception;
 
+    public boolean deletar(Integer id) throws Exception;
+
 }

@@ -6,7 +6,6 @@ package com.mycompany.deliverycontrol.repository;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.model.Entregador;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
