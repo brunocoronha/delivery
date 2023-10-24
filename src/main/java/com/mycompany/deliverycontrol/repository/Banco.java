@@ -37,7 +37,7 @@ public class Banco {
         connection.close();
     }
 
-    public boolean estaConectado() throws SQLException {
+    public boolean tentaConexao() throws SQLException {
         return connection.isClosed();
     }
 

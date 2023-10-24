@@ -41,4 +41,6 @@ public interface IRegistraEntregadoresCRUD {
      * @throws Exception
      */
     public Entregador consultar(Integer id) throws Exception;
+
+    public boolean deletar(Integer id) throws Exception;
 }

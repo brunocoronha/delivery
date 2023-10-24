@@ -60,8 +60,8 @@ public class JanelaPrincipal extends JFrame {
         botaoCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaListaCliente janelaCliente;
-                janelaCliente = new TelaListaCliente();
+                TelaCadastroCliente janelaCliente;
+                janelaCliente = new TelaCadastroCliente();
                 janelaCliente.setVisible(true);
                 
             }

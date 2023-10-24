@@ -39,4 +39,8 @@ public class RegistraEntregadoresControle implements IRegistraEntregadoresCRUD {
     public Entregador consultar(Integer id) throws Exception {
         return entregadoresPersistencia.consultar(id);
     }
+    @Override
+    public boolean deletar(Integer id) throws Exception {
+        return entregadoresPersistencia.deletar(id);
+    }
 }

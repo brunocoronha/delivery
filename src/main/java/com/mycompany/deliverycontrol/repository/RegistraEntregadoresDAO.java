@@ -5,18 +5,12 @@
 package com.mycompany.deliverycontrol.repository;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
-import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -25,23 +19,26 @@ import java.util.List;
 public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     Banco banco = Banco.getInstance();
+
+    /*     
     private String nomeDoArquivo = null;
 
     public RegistraEntregadoresDAO() {
         nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator
                 + "dadosDelivey\\entregadoresBD.txt";
-    }
+    } 
+    */
 
     @Override
     public void incluir(Entregador entregador) {
-        try {
-            banco.conexao();
-            if (!banco.estaConectado()) {
+        try {            
+            if (banco.tentaConexao()) {
+                banco.conexao();
                 System.out.println("conectado");
                 banco.insertEntregador(entregador);
                 banco.fechaConexao();
             } else {
-                System.out.println("nao conectado");
+                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -50,53 +47,35 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     }
 
     @Override
-    public void alterar(Entregador entregador) throws Exception {
-        int novaLinha = 0; // linha que será alterada
-        boolean entregadorEncontrado = false;
-        try {
-            FileReader fr = new FileReader(nomeDoArquivo);
-            try (BufferedReader br = new BufferedReader(fr)) {
-                String linha = "";
-                while ((linha = br.readLine()) != null) {
-                    String[] dados = linha.split(";");
-                    if (entregador.getId().equals(Integer.valueOf(dados[0]))) {
-                        System.out.println("Encontrou");
-                        entregadorEncontrado = true;
-                        break; // Caso encontre o entregador o laço é parado
-                    } else {
-                        novaLinha++; //
-                    }
-                }
-                br.close();
+    public void alterar(Entregador entregador) throws Exception {        
+        try{
+            if(banco.tentaConexao()){
+                banco.conexao();
+                banco.updateEntregador(entregador);
+                banco.fechaConexao();
+            } else {
+                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
             }
-        } catch (IOException e) {
-            throw new Exception("Não foi possível abrir o arquivo");
-        }
-        if (entregadorEncontrado) {
-            try {
-                Path arquivoPath = Path.of(nomeDoArquivo);
-                List<String> linhas = Files.readAllLines(arquivoPath, StandardCharsets.UTF_8);
-                linhas.set(novaLinha, entregador.toString()); // Altera a linha desejada
-                Files.write(arquivoPath, linhas, StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new Exception("Não foi possível alterar o arquivo");
-            }
-        } else {
-            System.out.println("Entregador não encontrado");
-        }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }       
 
     }
 
     @Override
     public ArrayList<Entregador> listagemDeEntregador() throws Exception {
         try {
-            banco.conexao();
-            ArrayList<Entregador> listaEntregadores = null;
-            System.out.println("conectado listagem");
-            banco.conexao();
-            listaEntregadores = banco.buscaEntregadores();
-            banco.fechaConexao();
-            return listaEntregadores;
+            if(banco.tentaConexao()){
+                banco.conexao();
+                ArrayList<Entregador> listaEntregadores = null;
+                System.out.println("conectado listagem");
+                banco.conexao();
+                listaEntregadores = banco.buscaEntregadores();
+                banco.fechaConexao();
+                return listaEntregadores;
+            }else {
+                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
+            }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -106,18 +85,39 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     @Override
     public Entregador consultar(Integer id) throws Exception {
-        try {            
-            banco.conexao();
-            System.out.println("consulta direta " + banco.buscaEntregador(17));
-            Entregador entregador = null;
-            System.out.println("conectado consulta");
-            entregador = banco.buscaEntregador(id);
-            banco.fechaConexao();
-            return entregador;
+        try {
+            if(banco.tentaConexao()){            
+                banco.conexao();
+                System.out.println("consulta direta " + banco.buscaEntregador(17));
+                Entregador entregador = null;
+                System.out.println("conectado consulta");
+                entregador = banco.buscaEntregador(id);
+                banco.fechaConexao();
+                return entregador;
+            }else {
+                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
+            }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean deletar(Integer id) throws Exception {
+        try{
+            if(banco.tentaConexao()){
+                banco.conexao();
+                boolean removeu = banco.removeEntregador(id);
+                banco.fechaConexao();
+                return removeu;
+            }else {
+                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
+            }            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }

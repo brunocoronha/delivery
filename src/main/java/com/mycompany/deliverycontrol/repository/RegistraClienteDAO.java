@@ -30,7 +30,7 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
     @Override
     public void incluir(Cliente cliente) {
         try {            
-            if (!banco.estaConectado()) {
+            if (!banco.tentaConexao()) {
                 banco.conexao();
                 System.out.println("conectadooooooooooooo");
                 banco.insertCliente(cliente);
