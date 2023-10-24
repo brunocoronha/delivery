@@ -1,12 +1,10 @@
 package com.mycompany.deliverycontrol.repository;
 
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.mycompany.deliverycontrol.model.Cliente;
@@ -47,17 +45,15 @@ public class Banco {
         connection.close();
     }
 
+    //#region CRUD_ENTREGADOR
     public void insertEntregador(Entregador entregador) throws SQLException {
         System.out.println(entregador.toString());
-        String sql = "INSERT INTO entregador (nome, telefone) VALUES (?, ?)";
-        // Crie um PreparedStatement com a consulta SQL
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        // Substitua os valores das colunas pelos valores reais que você deseja inserir
+        String sql = "INSERT INTO entregador (nome, telefone) VALUES (?, ?)";        
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);        
         preparedStatement.setString(1, entregador.getNome());
-        preparedStatement.setString(2, entregador.getTelefone());
-        // Execute o INSERT
+        preparedStatement.setString(2, entregador.getTelefone());        
         preparedStatement.executeUpdate();
-        // fechaConexao();
+        
     }
 
     public boolean removeEntregador(Integer id) throws SQLException {
@@ -112,15 +108,12 @@ public class Banco {
 
     public void insertCliente(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, endereco, telefone) VALUES (?, ?, ?)";
-        // Crie um PreparedStatement com a consulta SQL
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        // Substitua os valores das colunas pelos valores reais que você deseja inserir
         preparedStatement.setString(1, cliente.getNome());
         preparedStatement.setString(2, cliente.getEndereco());
         preparedStatement.setString(3, cliente.getTelefone());
-        // Execute o INSERT
         preparedStatement.executeUpdate();
-        // fechaConexao();
     }
+    //#endregion
 
 }
