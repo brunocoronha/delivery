@@ -28,6 +28,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    @Override
+    public String toString(){
+        return id + ";" + nome + ";" + endereco + ";" + telefone;
+    }
+
     // #endregion
 
     // #region Getter e Setter

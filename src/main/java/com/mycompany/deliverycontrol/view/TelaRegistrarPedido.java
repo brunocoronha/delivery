@@ -15,6 +15,9 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
      */
     public TelaRegistrarPedido() {
         initComponents();
+        this.setTitle("Registrar pedido");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**

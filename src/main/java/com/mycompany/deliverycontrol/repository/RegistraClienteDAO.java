@@ -18,32 +18,32 @@ import javax.swing.JOptionPane;
 import com.mycompany.deliverycontrol.CRUD.IRegistraClienteCRUD;
 import com.mycompany.deliverycontrol.model.Cliente;
 
-public class RegistraClienteDAO implements IRegistraClienteCRUD{
+public class RegistraClienteDAO implements IRegistraClienteCRUD {
 
     Banco banco = Banco.getInstance();
     private String nomeDoArquivo = null;
 
     public RegistraClienteDAO() {
-        
-        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator + "dadosDelivey\\ClienteBD.txt";
+
+        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator
+                + "dadosDelivey\\ClienteBD.txt";
     }
 
     @Override
-    public void incluir(Cliente cliente) throws Exception, SQLException {
-        banco.conexao();
-        if(banco.estaConectado()){
-            System.out.println("conectadooooooooooooo");
-            banco.insertCliente(cliente);
-        }else{
-            System.out.println("nao conectadooooooooooooo");
+    public void incluir(Cliente cliente) {
+        try {
+            banco.conexao();
+            if (!banco.estaConectado()) {
+                System.out.println("conectadooooooooooooo");
+                banco.insertCliente(cliente);
+            } else {
+                System.out.println("nao conectadooooooooooooo");
+            }
+            banco.fechaConexao();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Erro ao conectar no banco");
+            e.printStackTrace();
         }        
-        try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nomeDoArquivo, true))) {
-            buffWrite.append(cliente.toString() + "\n");
-            buffWrite.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        banco.fechaConexao();
     }
 
     @Override
@@ -85,39 +85,49 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD{
     }
 
     @Override
-    public ArrayList<Cliente> listagemDeCliente() throws Exception {
+    public ArrayList<Cliente> listagemDeCliente(){
+        ArrayList<Cliente> listaClientes = null;
+        try {
+            banco.conexao();
+            listaClientes = banco.buscaClientes();
+            banco.fechaConexao();
+            return listaClientes;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         return null;
     }
 
     @Override
     public Cliente consultar(Integer id) throws Exception {
-        /* 
-        try {
-            FileReader fr = new FileReader(nomeDoArquivo);
-            try (BufferedReader br = new BufferedReader(fr)) {
-                String linha = "";
-                while ((linha = br.readLine()) != null) {
-                    String[] dados = linha.split(";");
-                    if (id.equals(Integer.valueOf(dados[0]))) {
-                        Cliente Cliente = new Cliente(
-                                Integer.valueOf(dados[0]),
-                                dados[1],
-                                dados[2],
-                                dados[3],
-                                new Veiculo(dados[4], dados[5], dados[6]),
-                                Integer.parseInt(dados[7]));
-                        return Cliente;
-                    }
-                }
-                br.close();
-            }
-            return null;
-        } catch (IOException e) {
-            throw new Exception("Não foi possível abrir o arquivo");
-        }
-    */
-    return null;
+        /*
+         * try {
+         * FileReader fr = new FileReader(nomeDoArquivo);
+         * try (BufferedReader br = new BufferedReader(fr)) {
+         * String linha = "";
+         * while ((linha = br.readLine()) != null) {
+         * String[] dados = linha.split(";");
+         * if (id.equals(Integer.valueOf(dados[0]))) {
+         * Cliente Cliente = new Cliente(
+         * Integer.valueOf(dados[0]),
+         * dados[1],
+         * dados[2],
+         * dados[3],
+         * new Veiculo(dados[4], dados[5], dados[6]),
+         * Integer.parseInt(dados[7]));
+         * return Cliente;
+         * }
+         * }
+         * br.close();
+         * }
+         * return null;
+         * } catch (IOException e) {
+         * throw new Exception("Não foi possível abrir o arquivo");
+         * }
+         */
+        return null;
     }
-    
-    
+
 }

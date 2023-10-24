@@ -27,8 +27,7 @@ public class RegistraClienteControle implements IRegistraClienteCRUD{
 
     @Override
     public ArrayList<Cliente> listagemDeCliente() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listagemDeClientes'");
+        return registraClientePersistencia.listagemDeCliente();
     }
 
     @Override

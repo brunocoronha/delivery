@@ -22,6 +22,7 @@ public class JanelaPrincipal extends JFrame {
         setSize(400, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         JButton botaoPedido = new JButton("Pedido");
         JButton botaoEntregador = new JButton("Entregador");
@@ -59,8 +60,8 @@ public class JanelaPrincipal extends JFrame {
         botaoCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JanelaCliente janelaCliente;
-                janelaCliente = new JanelaCliente();
+                TelaListaCliente janelaCliente;
+                janelaCliente = new TelaListaCliente();
                 janelaCliente.setVisible(true);
                 
             }
