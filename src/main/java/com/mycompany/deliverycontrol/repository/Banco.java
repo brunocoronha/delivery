@@ -1,5 +1,6 @@
 package com.mycompany.deliverycontrol.repository;
 
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.google.protobuf.DescriptorProtos.EnumDescriptorProto.EnumReservedRange;
 import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
 
@@ -66,7 +66,7 @@ public class Banco {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         System.out.println(sql);
-        if(preparedStatement.executeUpdate() < 1){
+        if (preparedStatement.executeUpdate() < 1) {
             return false;
         }
         return true;
@@ -74,9 +74,9 @@ public class Banco {
 
     public ArrayList<Entregador> buscaEntregadores() throws SQLException {
         ArrayList<Entregador> entregadores = new ArrayList<>();
-        String sql = "SELECT * FROM entregador";
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        String sql = "SELECT id, nome, telefone FROM entregador";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Integer id = resultSet.getInt("id");
             String nome = resultSet.getString("nome");
@@ -87,19 +87,19 @@ public class Banco {
         return entregadores;
     }
 
-    public boolean updateEntregador(Entregador entregador) throws SQLException{
+    public boolean updateEntregador(Entregador entregador) throws SQLException {
         String sql = "UPDATE entregador SET nome = ?, telefone = ? WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, entregador.getNome());
         preparedStatement.setString(2, entregador.getTelefone());
         preparedStatement.setInt(3, entregador.getId());
-        if(preparedStatement.executeUpdate() < 1){
+        if (preparedStatement.executeUpdate() < 1) {
             return false;
         }
         return true;
     }
 
-    public Entregador buscaEntregador(Integer id) throws SQLException{
+    public Entregador buscaEntregador(Integer id) throws SQLException {
         String sql = "SELECT * FROM entregador WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
@@ -109,7 +109,7 @@ public class Banco {
         String telefoneEntregador = resultset.getString("telefone");
         return new Entregador(idEntregador, nomeEntregador, telefoneEntregador);
     }
-    
+
     public void insertCliente(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, endereco, telefone) VALUES (?, ?, ?)";
         // Crie um PreparedStatement com a consulta SQL

@@ -12,7 +12,6 @@ public class Entregador {
     private Integer id = 0;
     private String nome = "";
     private String telefone = "";
-    
 
     public Entregador(Integer id, String nome, String telefone) {
         this.id = id;
@@ -29,7 +28,7 @@ public class Entregador {
     public String toString() {
         return id + ";" +
                 nome + ";" +
-                telefone + ";";
+                telefone;
     }
 
     // #region Getter e Setter

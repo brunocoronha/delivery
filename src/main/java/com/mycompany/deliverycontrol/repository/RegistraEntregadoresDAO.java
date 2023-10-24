@@ -45,7 +45,7 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }        
+        }
     }
 
     @Override
@@ -88,6 +88,24 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     @Override
     public ArrayList<Entregador> listagemDeEntregador() throws Exception {
+        try {
+            ArrayList<Entregador> listaEntregadores = null;;
+            banco.conexao();
+            if (banco.estaConectado()) {
+                System.out.println("conectado listagem");
+                listaEntregadores = banco.buscaEntregadores();
+            } else {
+                System.out.println("nao conectado listagem");
+            }
+            banco.fechaConexao();
+            for (Entregador e : listaEntregadores) {
+                System.out.println(e.toString());
+            }
+            return listaEntregadores;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return null;
     }
 

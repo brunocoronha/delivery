@@ -4,6 +4,10 @@
  */
 package com.mycompany.deliverycontrol.view;
 
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.controller.RegistraEntregadoresControle;
 import com.mycompany.deliverycontrol.model.Entregador;
@@ -16,12 +20,13 @@ import com.mycompany.deliverycontrol.repository.Banco;
 public class TelaCadastroEntregador extends javax.swing.JFrame {
     IRegistraEntregadoresCRUD entregadores = new RegistraEntregadoresControle();
     Banco banco = Banco.getInstance();
-
+    DefaultTableModel modeloTabela;
     /**
      * Creates new form TelaCadastroCliente
      */
     public TelaCadastroEntregador() {
         initComponents();
+        modeloTabela = (DefaultTableModel) jTable_Entregadores.getModel();
     }
 
     /**
@@ -32,6 +37,7 @@ public class TelaCadastroEntregador extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
+    //#region GERADO AUTOMATICO
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -212,13 +218,14 @@ public class TelaCadastroEntregador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //#endregion
     private void jButton_SalvarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_SalvarActionPerformed
         String nome = jTextField_NomeEntregador.getText();
         String telefone = jTextField_TelefoneEntregador.getText();
         Entregador entregador = new Entregador(nome, telefone);
         try {
             entregadores.incluir(entregador);
+            //PreencheTabelas.preencherTabelaEntregadores(modeloTabela, entregadores.listagemDeEntregador());
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

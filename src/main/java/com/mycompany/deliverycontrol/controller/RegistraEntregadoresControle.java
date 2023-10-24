@@ -32,7 +32,7 @@ public class RegistraEntregadoresControle implements IRegistraEntregadoresCRUD {
 
     @Override
     public ArrayList<Entregador> listagemDeEntregador() throws Exception {
-        return null;
+        return entregadoresPersistencia.listagemDeEntregador();
     }
 
     @Override
