@@ -15,14 +15,13 @@ public class RegistraClienteControle implements IRegistraClienteCRUD{
     }
 
     @Override
-    public void incluir(Cliente Cliente) throws Exception {
-        registraClientePersistencia.incluir(Cliente);
+    public void incluir(Cliente cliente) throws Exception {
+        registraClientePersistencia.incluir(cliente);
     }
 
     @Override
-    public void alterar(Cliente Cliente) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+    public void alterar(Cliente cliente) throws Exception {
+        registraClientePersistencia.alterar(cliente);
     }
 
     @Override

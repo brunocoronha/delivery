@@ -3,6 +3,7 @@ package com.mycompany.deliverycontrol.repository;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraClienteCRUD;
 import com.mycompany.deliverycontrol.model.Cliente;
@@ -62,15 +63,12 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
     @Override
     public Cliente consultar(Integer id) throws Exception {
         try {
-            banco.conexao();
-            System.out.println("consulta direta " + banco.buscaCliente(id));
-            Cliente cliente = null;
-            System.out.println("conectado consulta");
-            cliente = banco.buscaCliente(id);
+            banco.conexao();           
+            Cliente cliente = banco.buscaCliente(id);
             banco.fechaConexao();
             return cliente;
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Cliente não cadastrado");
         }
         return null;
     }
