@@ -3,7 +3,6 @@ package com.mycompany.deliverycontrol.repository;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraClienteCRUD;
 import com.mycompany.deliverycontrol.model.Cliente;
