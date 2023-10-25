@@ -8,8 +8,6 @@ import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.model.Entregador;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -19,26 +17,22 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     Banco banco = Banco.getInstance();
 
-    /*     
-    private String nomeDoArquivo = null;
-
-    public RegistraEntregadoresDAO() {
-        nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" + File.separator
-                + "dadosDelivey\\entregadoresBD.txt";
-    } 
-    */
+    /*
+     * private String nomeDoArquivo = null;
+     * 
+     * public RegistraEntregadoresDAO() {
+     * nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" +
+     * File.separator
+     * + "dadosDelivey\\entregadoresBD.txt";
+     * }
+     */
 
     @Override
     public void incluir(Entregador entregador) {
-        try {            
-            if (banco.tentaConexao()) {
-                banco.conexao();
-                System.out.println("conectado");
-                banco.insertEntregador(entregador);
-                banco.fechaConexao();
-            } else {
-                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
-            }
+        try {
+            banco.conexao();
+            banco.insertEntregador(entregador);
+            banco.fechaConexao();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -46,37 +40,27 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     }
 
     @Override
-    public void alterar(Entregador entregador) throws Exception {        
-        try{
-            if(banco.tentaConexao()){
-                banco.conexao();
-                banco.updateEntregador(entregador);
-                banco.fechaConexao();
-            } else {
-                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
-            }
-        }catch(SQLException e){
+    public void alterar(Entregador entregador) throws Exception {
+        try {
+            banco.conexao();
+            banco.updateEntregador(entregador);
+            banco.fechaConexao();
+        } catch (SQLException e) {
             e.printStackTrace();
-        }       
-
+        }
     }
 
     @Override
     public ArrayList<Entregador> listagemDeEntregador() throws Exception {
         try {
-            if(banco.tentaConexao()){
-                banco.conexao();
-                ArrayList<Entregador> listaEntregadores = null;
-                System.out.println("conectado listagem");
-                banco.conexao();
-                listaEntregadores = banco.buscaEntregadores();
-                banco.fechaConexao();
-                return listaEntregadores;
-            }else {
-                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
-            }
+            banco.conexao();
+            ArrayList<Entregador> listaEntregadores = null;
+            System.out.println("conectado listagem");
+            banco.conexao();
+            listaEntregadores = banco.buscaEntregadores();
+            banco.fechaConexao();
+            return listaEntregadores;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
@@ -85,17 +69,13 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     @Override
     public Entregador consultar(Integer id) throws Exception {
         try {
-            if(banco.tentaConexao()){            
-                banco.conexao();
-                System.out.println("consulta direta " + banco.buscaEntregador(17));
-                Entregador entregador = null;
-                System.out.println("conectado consulta");
-                entregador = banco.buscaEntregador(id);
-                banco.fechaConexao();
-                return entregador;
-            }else {
-                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
-            }
+            banco.conexao();
+            System.out.println("consulta direta " + banco.buscaEntregador(17));
+            Entregador entregador = null;
+            System.out.println("conectado consulta");
+            entregador = banco.buscaEntregador(id);
+            banco.fechaConexao();
+            return entregador;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -105,16 +85,12 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     @Override
     public boolean deletar(Integer id) throws Exception {
-        try{
-            if(banco.tentaConexao()){
-                banco.conexao();
-                boolean removeu = banco.removeEntregador(id);
-                banco.fechaConexao();
-                return removeu;
-            }else {
-                JOptionPane.showMessageDialog(null, "banco de dados indisponivel");
-            }            
-        }catch(SQLException e){
+        try {
+            banco.conexao();
+            boolean removeu = banco.removeEntregador(id);
+            banco.fechaConexao();
+            return removeu;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
