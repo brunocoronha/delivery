@@ -1,5 +1,6 @@
-create database DeliveryControl;
-drop database DeliveryControl;
+-- Script Mysql versão 8.0 + 
+
+create database if not exists DeliveryControl;
 
 use deliverycontrol;
 
@@ -29,7 +30,6 @@ create table Pedido(
 	FOREIGN KEY (id_cliente) REFERENCES Cliente(id),
     FOREIGN KEY (id_entregador) REFERENCES Entregador(id)
 );
-
 
 -- cria tabela EntregaRealizada
 create table EntregaRealizada(
