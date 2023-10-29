@@ -124,7 +124,7 @@ public class JanelaPedido extends JFrame {
                 String telefone = telefoneField.getText();
                 String observacao = observacaoField.getText();
                 String hrEntrega = hrEntregaField.getText();
-                Pedido pedido = new Pedido(id, nome, endereco, telefone, observacao, hrEntrega);
+                Pedido pedido = new Pedido(id,1,"teste");
                 System.out.println("Tela > " + pedido.toString());
                 try {
                     pedidos.incluir(pedido);

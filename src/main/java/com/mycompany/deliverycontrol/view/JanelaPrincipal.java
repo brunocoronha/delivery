@@ -37,7 +37,7 @@ public class JanelaPrincipal extends JFrame {
         botaoPedido.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JanelaPedido janelaPedido = new JanelaPedido();
+                TelaRegistrarPedido janelaPedido = new TelaRegistrarPedido();
                 janelaPedido.setVisible(true);
                 janelaPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
