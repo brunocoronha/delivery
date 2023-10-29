@@ -2,14 +2,16 @@ package com.mycompany.deliverycontrol.view;
 
 import javax.swing.*;
 
+import com.mycompany.deliverycontrol.CRUD.IRegistraClienteCRUD;
 import com.mycompany.deliverycontrol.model.Cliente;
+import com.mycompany.deliverycontrol.repository.RegistraClienteDAO;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FrameBuscaID extends JFrame {
     private JTextField jtextfield_id;
-    private Object busca;
+    private IRegistraClienteCRUD clienteCRUD = new RegistraClienteDAO();
 
     public FrameBuscaID() {
         super("Busca por ID");
@@ -37,7 +39,8 @@ public class FrameBuscaID extends JFrame {
                 JOptionPane.showMessageDialog(null, "Você digitou o ID: " + id);
 
                 // Aqui você pode chamar um método que faz algo com o ID
-                fazAlgoComID(id);
+                System.out.println(buscaCliente(id).toString());
+                buscaCliente(id);
             }
         });
 
@@ -52,9 +55,12 @@ public class FrameBuscaID extends JFrame {
     }
 
     // Método para fazer algo com o ID
-    private Cliente fazAlgoComID(Integer id) {
-        // Faça algo com o ID aqui
-        System.out.println("ID recebido: " + id);
+    private Cliente buscaCliente(Integer id){
+        try {
+            return clienteCRUD.consultar(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

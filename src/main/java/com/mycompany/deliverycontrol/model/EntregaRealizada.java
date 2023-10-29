@@ -10,8 +10,8 @@ package com.mycompany.deliverycontrol.model;
  */
 public class EntregaRealizada extends Entrega{
 
-    public EntregaRealizada(Pedido pedido, Entregador entregador) {
-        super(pedido, entregador);
+    public EntregaRealizada(Integer id, Integer id_pedido, String hrEntrega) {
+        super(id, id_pedido, hrEntrega);
     }
 
 }

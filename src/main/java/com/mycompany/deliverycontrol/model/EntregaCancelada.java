@@ -12,8 +12,8 @@ public class EntregaCancelada extends Entrega{
 
     private String motivo = "";
 
-    public EntregaCancelada(Pedido pedido, Entregador entregador, String motivo) {
-        super(pedido, entregador);
+    public EntregaCancelada(Integer id, Integer id_pedido, String motivo) {
+        super(id, id_pedido);
         this.motivo = motivo;
     }
     

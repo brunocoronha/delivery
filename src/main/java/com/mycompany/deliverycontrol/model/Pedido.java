@@ -12,34 +12,22 @@ public class Pedido {
     private Integer id = 0;
     private Integer id_cliente = 0;
     private Integer id_entregador = 0;
-    private String nome = "";
-    private String endereco = "";
-    private String telefone = "";
     private String observacao = "";
-    private String hrEntrega = "";
     private StatusPedidoENUM statusPedido = null;
 
-    public Pedido(Integer id, String nome, String endereco, String telefone, String observacao, String hrEntrega) {
+    public Pedido(Integer id, Integer id_cliente, String observacao) {
         this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.telefone = telefone;
+        this.id_cliente = id_cliente;
         this.observacao = observacao;
-        this.hrEntrega = hrEntrega;
-        //this.id_cliente = id_cliente;
-        //this.id_entregador = id_entregador;
     }
 
     @Override
     public String toString() {
         return id +
-                ";" + nome +
-                ";" + endereco +
-                ";" + telefone +
+                ";" + id_cliente +
+                ";" + id_entregador +
                 ";" + observacao +
-                ";" + hrEntrega;// +
-                //";" + id_cliente +
-                //";" + id_entregador;
+                ";" + statusPedido;
     }
 
     public Integer getId() {
@@ -48,30 +36,6 @@ public class Pedido {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getObservacao() {
@@ -89,15 +53,7 @@ public class Pedido {
     public void setStatusPedido(StatusPedidoENUM statusPedido) {
         this.statusPedido = statusPedido;
     }
-
-    public String getHrEntrega() {
-        return hrEntrega;
-    }
-
-    public void setHrEntrega(String hrEntrega) {
-        this.hrEntrega = hrEntrega;
-    }
-
+    
     public StatusPedidoENUM getStatusPedido() {
         return statusPedido;
     }
@@ -118,7 +74,4 @@ public class Pedido {
         this.id_entregador = id_entregador;
     }
 
-    
-
 }
-

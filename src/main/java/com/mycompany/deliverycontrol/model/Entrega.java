@@ -9,41 +9,26 @@ package com.mycompany.deliverycontrol.model;
  * @author brunocoronha.adm
  */
 public abstract class Entrega {
-    private String nomeEntregador;
+
+    private Integer id;
+    private Integer id_pedido;
     private String hrEntrega;
-    private Integer id;    
 
-    public Entrega(String nomeEntregador, String hrEntrega, Integer id) {
-        this.nomeEntregador = nomeEntregador;
-        this.hrEntrega = hrEntrega;
+    public Entrega(Integer id, Integer id_pedido, String hrEntrega) {
         this.id = id;
+        this.id_pedido = id_pedido;
+        this.hrEntrega = hrEntrega;
     }
-
-    public Entrega(Pedido pedido, Entregador entregador){
-        nomeEntregador = entregador.getNome();
-        hrEntrega = pedido.getHrEntrega();
-        id = pedido.getId();
+     public Entrega(Integer id, Integer id_pedido) {
+        this.id = id;
+        this.id_pedido = id_pedido;
     }
 
     @Override
     public String toString() {
-        return id + ";" + nomeEntregador + ";" + hrEntrega;
-    }
-
-    public String getNomeEntregador() {
-        return nomeEntregador;
-    }
-
-    public void setNomeEntregador(String nomeEntregador) {
-        this.nomeEntregador = nomeEntregador;
-    }
-
-    public String getHrEntrega() {
-        return hrEntrega;
-    }
-
-    public void setHrEntrega(String hrEntrega) {
-        this.hrEntrega = hrEntrega;
+        return id +
+                ";" + id_pedido +
+                ";" + hrEntrega;
     }
 
     public Integer getId() {
@@ -54,5 +39,20 @@ public abstract class Entrega {
         this.id = id;
     }
 
-    
+    public Integer getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(Integer id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+
+    public String getHrEntrega() {
+        return hrEntrega;
+    }
+
+    public void setHrEntrega(String hrEntrega) {
+        this.hrEntrega = hrEntrega;
+    }    
+
 }
