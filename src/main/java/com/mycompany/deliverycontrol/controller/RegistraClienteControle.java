@@ -38,5 +38,10 @@ public class RegistraClienteControle implements IRegistraClienteCRUD{
     public boolean deletar(Integer id) throws Exception {
         return registraClientePersistencia.deletar(id);
     }
+
+    @Override
+    public Cliente consultarPorNome(String nome) throws Exception {
+        return registraClientePersistencia.consultarPorNome(nome);
+    }
     
 }

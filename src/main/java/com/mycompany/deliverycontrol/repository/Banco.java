@@ -89,7 +89,6 @@ public class Banco {
             return entregador;
         }
         return null;
-
     }
 
     public boolean updateEntregador(Entregador entregador) throws SQLException {
@@ -156,6 +155,24 @@ public class Banco {
             String telefoneCliente = resultset.getString("telefone");
             return new Cliente(idCliente, nomeCliente, enderecoCLiente, telefoneCliente);
         }
+        return null;
+    }
+
+    public Cliente buscaClientePorNome(String nome) throws SQLException {
+        System.out.println("CHEGOU O NOME: " + nome);
+        String sql = "SELECT * FROM cliente WHERE nome LIKE ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "%" + nome + "%");
+        ResultSet resultset = preparedStatement.executeQuery();
+        if (resultset.next()) {
+            int idCliente = resultset.getInt("id");
+            String nomeCliente = resultset.getString("nome");
+            String enderecoCLiente = resultset.getString("endereco");
+            String telefoneCliente = resultset.getString("telefone");
+            Cliente cliente = new Cliente(idCliente, nomeCliente, enderecoCLiente, telefoneCliente);
+            System.out.println(cliente.toString());
+            return cliente;
+        }        
         return null;
     }
 

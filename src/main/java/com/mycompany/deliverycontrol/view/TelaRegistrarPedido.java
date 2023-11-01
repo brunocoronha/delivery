@@ -328,8 +328,19 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
+        }else if (jComboBox_buscaCliente.getSelectedIndex() == 2){
+                try {
+                Cliente cliente = clientes.consultarPorNome(jTextField_buscaCliente.getText());
+                jTextField_clienteNome.setText(cliente.getNome());
+                jTextField_enderecoCliente.setText(cliente.getEndereco());
+                jTextField_telefoneCliente.setText(cliente.getTelefone());
+                System.out.println(cliente.toString());
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
+
     }// GEN-LAST:event_jButton_BuscaClienteActionPerformed
 
     private void jTextField_buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField_buscaClienteActionPerformed

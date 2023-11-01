@@ -86,4 +86,17 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
         return false;
     }
 
+    @Override
+    public Cliente consultarPorNome(String nome) throws Exception {
+        try {
+            banco.conexao();           
+            Cliente cliente = banco.buscaClientePorNome(nome);
+            banco.fechaConexao();
+            return cliente;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Cliente não cadastrado");
+        }
+        return null;
+    }
+
 }
