@@ -42,7 +42,6 @@ public class Banco {
 
     // #region CRUD_ENTREGADOR
     public void insertEntregador(Entregador entregador) throws SQLException {
-        System.out.println(entregador.toString());
         String sql = "INSERT INTO entregador (nome, telefone) VALUES (?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, entregador.getNome());
@@ -52,7 +51,6 @@ public class Banco {
     }
 
     public boolean removeEntregador(Integer id) throws SQLException {
-        System.out.println("entrou no método removeEntregador");
         String sql = "DELETE FROM entregador WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);

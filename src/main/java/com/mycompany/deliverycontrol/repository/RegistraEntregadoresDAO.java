@@ -55,7 +55,6 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
         try {
             banco.conexao();
             ArrayList<Entregador> listaEntregadores = null;
-            System.out.println("conectado listagem");
             banco.conexao();
             listaEntregadores = banco.buscaEntregadores();
             banco.fechaConexao();
@@ -70,10 +69,7 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
     public Entregador consultar(Integer id) throws Exception {
         try {
             banco.conexao();
-            System.out.println("consulta direta " + banco.buscaEntregador(17));
-            Entregador entregador = null;
-            System.out.println("conectado consulta");
-            entregador = banco.buscaEntregador(id);
+            Entregador entregador = banco.buscaEntregador(id);
             banco.fechaConexao();
             return entregador;
         } catch (SQLException e) {
