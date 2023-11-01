@@ -17,7 +17,6 @@ public class Banco {
     }
 
     private static Connection connection;
-
     private static Banco banco;
 
     public static Banco getInstance() {
@@ -29,7 +28,7 @@ public class Banco {
 
     public void conexao() throws SQLException {
         String user = "root";
-        String senha = "123456789";
+        String senha = "Getin@dm";
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DeliveryControl", user, senha);
     }
 
