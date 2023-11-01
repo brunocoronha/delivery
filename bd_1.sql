@@ -53,4 +53,6 @@ select * from entregador where id = 17;
 
 select * from cliente;
 
-SELECT id, nome, telefone FROM entregador
+select nome, endereco, telefone from cliente where nome = 'joao gomes';
+
+SELECT id, nome, telefone FROM entregador;
