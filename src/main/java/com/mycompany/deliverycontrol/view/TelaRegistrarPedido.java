@@ -4,7 +4,7 @@
  */
 package com.mycompany.deliverycontrol.view;
 
-import javax.swing.JComboBox;
+
 import javax.swing.JOptionPane;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraClienteCRUD;
@@ -430,7 +430,7 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
         }// GEN-LAST:event_jComboBox_buscaClienteActionPerformed
 
         private void jButton_registrarClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_registrarClienteActionPerformed
-                TelaCadastroCliente_1 telaCliente = new TelaCadastroCliente_1();
+                TelaCadastroCliente telaCliente = new TelaCadastroCliente();
                 telaCliente.setVisible(true);
         }// GEN-LAST:event_jButton_registrarClienteActionPerformed
 

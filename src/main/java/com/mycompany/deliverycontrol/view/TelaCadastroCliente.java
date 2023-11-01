@@ -81,6 +81,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel_Icon = new javax.swing.JLabel();
+        jButton_Voltar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTextField_nome = new javax.swing.JTextField();
         jTextField_Endereco = new javax.swing.JTextField();
@@ -111,6 +112,14 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
         jLabel_Icon.setIcon(icon); // NOI18N
 
+        jButton_Voltar.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jButton_Voltar.setText("Voltar");
+        jButton_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_VoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,8 +129,13 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(36, 36, 36))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton_Voltar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_Icon)
                 .addContainerGap())
@@ -131,8 +145,11 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_Icon, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton_Voltar)
+                        .addGap(87, 87, 87)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_Icon))
                 .addGap(86, 86, 86)
                 .addComponent(jLabel6)
                 .addContainerGap())
@@ -311,6 +328,15 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VoltarActionPerformed
+        TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
+        telaPrincipalDeliveryControl.dispose();
+        telaPrincipalDeliveryControl.setLocationRelativeTo(this);
+        telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        telaPrincipalDeliveryControl.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_VoltarActionPerformed
+
     private void jButton_buscarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_buscarActionPerformed
         try {
             Integer id = Integer.parseInt(jTextField_deletarID.getText());
@@ -410,6 +436,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Voltar;
     private javax.swing.JButton jButton_buscar;
     private javax.swing.JButton jButton_deletar;
     private javax.swing.JButton jButton_limpar;

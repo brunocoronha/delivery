@@ -3,7 +3,9 @@
  */
 package com.mycompany.deliverycontrol;
 
-import com.mycompany.deliverycontrol.view.JanelaPrincipal;
+
+import com.mycompany.deliverycontrol.view.TelaPrincipalDeliveryControl;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,7 +32,7 @@ public class DeliveryControl {
 
             }
         }
-        JanelaPrincipal janela = new JanelaPrincipal();
+        TelaPrincipalDeliveryControl janela = new TelaPrincipalDeliveryControl();
         janela.setVisible(true);
 
         
