@@ -28,7 +28,7 @@ public class Banco {
 
     public void conexao() throws SQLException {
         String user = "root";
-        String senha = "123456789";
+        String senha = "Ghua1b2c3";
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DeliveryControl", user, senha);
     }
 
