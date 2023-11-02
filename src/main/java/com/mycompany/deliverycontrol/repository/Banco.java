@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
+import com.mycompany.deliverycontrol.model.LoginUsuario;
+
+import javax.swing.*;
 
 public class Banco {
 
@@ -28,7 +31,7 @@ public class Banco {
 
     public void conexao() throws SQLException {
         String user = "root";
-        String senha = "Ghua1b2c3";
+        String senha = "123456789";
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DeliveryControl", user, senha);
     }
 
@@ -40,6 +43,21 @@ public class Banco {
         return connection.isClosed();
     }
 
+    public ResultSet autenticacaoUsuario(LoginUsuario novoLogin) throws SQLException {
+        try {
+            String sql = "SELECT * FROM login WHERE nome_usuario = ? and senha_usuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            System.out.println(novoLogin.getSenha_usuario());
+            System.out.println(novoLogin.getSenha_usuario());
+            preparedStatement.setString(1, novoLogin.getNome_usuario());
+            preparedStatement.setString(2, novoLogin.getSenha_usuario());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet;
+        }catch (SQLException erro ) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar!" + erro.getMessage());
+        }
+        return null;
+    }
     // #region CRUD_ENTREGADOR
     public void insertEntregador(Entregador entregador) throws SQLException {
         String sql = "INSERT INTO entregador (nome, telefone) VALUES (?, ?)";

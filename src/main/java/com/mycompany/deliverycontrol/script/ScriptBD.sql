@@ -49,6 +49,12 @@ create table EntregaCancelada(
 	FOREIGN KEY (id_pedido) REFERENCES Pedido(id)
 );
 
+create table login(
+   id integer not null primary key auto_increment,
+   nome_usuario varchar(40),
+   senha_usuario varchar(40)
+);
+
 select * from entregador where id = 17;
 
 select * from cliente;
