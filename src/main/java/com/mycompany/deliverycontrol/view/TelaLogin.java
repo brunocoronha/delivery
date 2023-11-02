@@ -200,22 +200,34 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jButton_AcessarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton_AcessarActionPerformed
             banco.conexao();
             String nome_usuario = (String) jComboBox_Usuarios.getSelectedItem();
-//            String nome_usuario = jTextField_Usuario.getText();
             String senha_usuario = jPasswordField_Senha.getText();
             LoginUsuario novoLogin = new LoginUsuario(nome_usuario,senha_usuario);
-            ResultSet resultSet = banco.autenticacaoUsuario(novoLogin);
-            if(resultSet.next()){
-                TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
-                telaPrincipalDeliveryControl.dispose();
-                telaPrincipalDeliveryControl.setLocationRelativeTo(this);
-                telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                telaPrincipalDeliveryControl.setVisible(true);
-                dispose();
+            if(nome_usuario.equals("admin")){
+                ResultSet resultSet = banco.autenticacaoUsuario(novoLogin);
+                if(resultSet.next()){
+                    TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
+                    telaPrincipalDeliveryControl.dispose();
+                    telaPrincipalDeliveryControl.setLocationRelativeTo(this);
+                    telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    telaPrincipalDeliveryControl.setVisible(true);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuario ou senha Invalida!!");
+                }
             }else{
-                JOptionPane.showMessageDialog(null, "Usuario ou senha Invalida!!");
+                ResultSet resultSet = banco.autenticacaoUsuario(novoLogin);
+                if(resultSet.next()){
+                    TelaPrincipalUser telaPrincipalUser = new TelaPrincipalUser();
+                    telaPrincipalUser.dispose();
+                    telaPrincipalUser.setLocationRelativeTo(this);
+                    telaPrincipalUser.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    telaPrincipalUser.setVisible(true);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuario ou senha Invalida!!");
+                }
             }
             banco.fechaConexao();
-
     }//GEN-LAST:event_jButton_AcessarActionPerformed
 
     /**
