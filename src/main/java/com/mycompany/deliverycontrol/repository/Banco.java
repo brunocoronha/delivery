@@ -61,8 +61,6 @@ public class Banco {
         try {
             String sql = "SELECT * FROM login WHERE nome_usuario = ? and senha_usuario = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            System.out.println(novoLogin.getSenha_usuario());
-            System.out.println(novoLogin.getSenha_usuario());
             preparedStatement.setString(1, novoLogin.getNome_usuario());
             preparedStatement.setString(2, novoLogin.getSenha_usuario());
             ResultSet resultSet = preparedStatement.executeQuery();

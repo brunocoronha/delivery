@@ -201,7 +201,8 @@ public class TelaLogin extends javax.swing.JFrame {
             banco.conexao();
             String nome_usuario = (String) jComboBox_Usuarios.getSelectedItem();
             String senha_usuario = jPasswordField_Senha.getText();
-            LoginUsuario novoLogin = new LoginUsuario(nome_usuario,senha_usuario);
+            String senhaMD5 = GeradorMD5.gerarMD5(senha_usuario);
+            LoginUsuario novoLogin = new LoginUsuario(nome_usuario,senhaMD5);
             if(nome_usuario.equals("admin")){
                 ResultSet resultSet = banco.autenticacaoUsuario(novoLogin);
                 if(resultSet.next()){
