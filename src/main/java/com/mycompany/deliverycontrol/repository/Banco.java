@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.LoginUsuario;
+import com.mysql.cj.log.Log;
 
 import javax.swing.*;
 
@@ -43,6 +44,19 @@ public class Banco {
         return connection.isClosed();
     }
 
+    public ArrayList<LoginUsuario> buscaUsuarios() throws SQLException {
+        ArrayList<LoginUsuario> usuarios = new ArrayList<>();
+        String sql = "SELECT nome_usuario, senha_usuario FROM login";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String nome_usuario = resultSet.getString("nome_usuario");
+            String senha_usuario = resultSet.getString("senha_usuario");
+            LoginUsuario usuario = new LoginUsuario(nome_usuario, senha_usuario);
+            usuarios.add(usuario);
+        }
+        return usuarios;
+    }
     public ResultSet autenticacaoUsuario(LoginUsuario novoLogin) throws SQLException {
         try {
             String sql = "SELECT * FROM login WHERE nome_usuario = ? and senha_usuario = ?";

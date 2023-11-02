@@ -4,6 +4,7 @@
  */
 package com.mycompany.deliverycontrol.view;
 
+import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.LoginUsuario;
 import com.mycompany.deliverycontrol.repository.Banco;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +32,11 @@ public class TelaLogin extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Acesso ao Sistema");
+        try {
+            preencherComboBoxLogin();
+        }catch (Exception erro) {
+
+        }
     }
     String urlDaImagem = "https://www.segredes.com.br/deliverycontrol/img/dc-pequeno.png";
 
@@ -50,6 +57,21 @@ public class TelaLogin extends javax.swing.JFrame {
             return null; // Retornar null em caso de erro
         }
     }
+    private void preencherComboBoxLogin()  {
+        try {
+            banco.conexao();
+            ArrayList<LoginUsuario> usuariosLista = banco.buscaUsuarios();
+            jComboBox_Usuarios.removeAllItems();
+            jComboBox_Usuarios.addItem("Escolha um usuario:");
+            for (LoginUsuario usuarios : usuariosLista) {
+                System.out.println(usuarios.getNome_usuario());
+                jComboBox_Usuarios.addItem(usuarios.getNome_usuario());
+            }
+            banco.fechaConexao();
+        }catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,10 +85,10 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField_Usuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton_Acessar = new javax.swing.JButton();
         jPasswordField_Senha = new javax.swing.JPasswordField();
+        jComboBox_Usuarios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,15 +152,15 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 107, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton_Acessar)
                         .addGap(160, 160, 160))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox_Usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(95, 95, 95))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -147,8 +169,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox_Usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,8 +199,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jButton_AcessarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton_AcessarActionPerformed
             banco.conexao();
-            String nome_usuario = jTextField_Usuario.getText();
-            String senha_usuario = jTextField_Usuario.getText();
+            String nome_usuario = (String) jComboBox_Usuarios.getSelectedItem();
+//            String nome_usuario = jTextField_Usuario.getText();
+            String senha_usuario = jPasswordField_Senha.getText();
             LoginUsuario novoLogin = new LoginUsuario(nome_usuario,senha_usuario);
             ResultSet resultSet = banco.autenticacaoUsuario(novoLogin);
             if(resultSet.next()){
@@ -232,12 +255,12 @@ public class TelaLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Acessar;
+    private javax.swing.JComboBox<String> jComboBox_Usuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField_Senha;
-    private javax.swing.JTextField jTextField_Usuario;
     // End of variables declaration//GEN-END:variables
 }
