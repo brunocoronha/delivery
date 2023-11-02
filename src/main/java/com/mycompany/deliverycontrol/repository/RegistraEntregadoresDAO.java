@@ -17,15 +17,7 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
 
     Banco banco = Banco.getInstance();
 
-    /*
-     * private String nomeDoArquivo = null;
-     * 
-     * public RegistraEntregadoresDAO() {
-     * nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" +
-     * File.separator
-     * + "dadosDelivey\\entregadoresBD.txt";
-     * }
-     */
+
 
     @Override
     public void incluir(Entregador entregador) {

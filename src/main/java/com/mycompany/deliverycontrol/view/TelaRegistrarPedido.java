@@ -15,10 +15,12 @@ import com.mycompany.deliverycontrol.controller.RegistraClienteControle;
 import com.mycompany.deliverycontrol.controller.RegistraEntregadoresControle;
 import com.mycompany.deliverycontrol.controller.RegistraPedidoControle;
 import com.mycompany.deliverycontrol.model.Cliente;
+import com.mycompany.deliverycontrol.model.Entregador;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  *
@@ -49,13 +51,18 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
                 jTextField_clienteNome.setEditable(false);
                 jTextField_enderecoCliente.setEditable(false);
                 jTextField_telefoneCliente.setEditable(false);
-        }
-    String urlDaImagem = "https://www.segredes.com.br/deliverycontrol/img/dc-pequeno.png";
 
+                try {
+                    preencherComboBoxEntregador();
+                }catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+        }
+
+    String urlDaImagem = "https://www.segredes.com.br/deliverycontrol/img/dc-pequeno.png";
     // Baixar a imagem da internet e criar um ImageIcon
     ImageIcon icon = criarImageIcon(urlDaImagem);
-
-
     public static ImageIcon criarImageIcon(String url) {
         try {
             // Carregar a imagem a partir do URL
@@ -70,6 +77,14 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
         }
     }
 
+    private void preencherComboBoxEntregador() throws Exception {
+        ArrayList<Entregador> entregadorLista = entregadores.listagemDeEntregador();
+        jComboBox_Motoqueiro.removeAllItems();
+        jComboBox_Motoqueiro.addItem("Escolha o Entregador:");
+        for (Entregador entregador : entregadorLista) {
+            jComboBox_Motoqueiro.addItem(entregador.getNome());
+        }
+    }
         /**
          * This method is called from within the constructor to initialize the form.
          * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +116,8 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
         jComboBox_buscaCliente = new javax.swing.JComboBox<>();
         jTextField_buscaCliente = new javax.swing.JTextField();
         jButton_registrarCliente = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBox_Motoqueiro = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,6 +245,10 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Motoqueiro:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -248,11 +269,11 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -266,13 +287,14 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jTextField_clienteNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField_telefoneCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField_enderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(jTextField_enderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBox_Motoqueiro, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_BuscaCliente)
                     .addComponent(jLabel5)
@@ -293,16 +315,20 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jComboBox_Motoqueiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
                         .addComponent(jLabel4))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(68, 68, 68)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_salvarPedido)
                     .addComponent(jButton_limparPedido))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -476,6 +502,7 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
     private javax.swing.JButton jButton_limparPedido;
     private javax.swing.JButton jButton_registrarCliente;
     private javax.swing.JButton jButton_salvarPedido;
+    private javax.swing.JComboBox<String> jComboBox_Motoqueiro;
     private javax.swing.JComboBox<String> jComboBox_buscaCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -485,6 +512,7 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
