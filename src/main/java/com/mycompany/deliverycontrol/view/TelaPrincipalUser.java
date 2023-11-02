@@ -124,20 +124,20 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem_RegistrarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_RegistrarPedidoActionPerformed
-        TelaRegistrarPedido registrarPedido = new TelaRegistrarPedido();
-        registrarPedido.dispose();
-        registrarPedido.setLocationRelativeTo(this);
-        registrarPedido.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        registrarPedido.setVisible(true);
+        TelaRegistrarPedidoUsuario registrarPedidoUsuario = new TelaRegistrarPedidoUsuario();
+        registrarPedidoUsuario.dispose();
+        registrarPedidoUsuario.setLocationRelativeTo(this);
+        registrarPedidoUsuario.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        registrarPedidoUsuario.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem_RegistrarPedidoActionPerformed
 
     private void jMenuItem_CadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CadastrarClienteActionPerformed
-        TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
-        telaCadastroCliente.dispose();
-        telaCadastroCliente.setLocationRelativeTo(this);
-        telaCadastroCliente.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        telaCadastroCliente.setVisible(true);
+        TelaCadastroClienteUsuario telaCadastroClienteUsuario = new TelaCadastroClienteUsuario();
+        telaCadastroClienteUsuario.dispose();
+        telaCadastroClienteUsuario.setLocationRelativeTo(this);
+        telaCadastroClienteUsuario.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        telaCadastroClienteUsuario.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem_CadastrarClienteActionPerformed
 
