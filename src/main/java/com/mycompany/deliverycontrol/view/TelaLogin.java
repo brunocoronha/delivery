@@ -39,11 +39,8 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }
     String urlDaImagem = "https://www.segredes.com.br/deliverycontrol/img/dc-pequeno.png";
-
     // Baixar a imagem da internet e criar um ImageIcon
     ImageIcon icon = criarImageIcon(urlDaImagem);
-
-
     public static ImageIcon criarImageIcon(String url) {
         try {
             // Carregar a imagem a partir do URL

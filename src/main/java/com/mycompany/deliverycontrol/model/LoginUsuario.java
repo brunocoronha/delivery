@@ -11,6 +11,12 @@ public class LoginUsuario {
         this.senha_usuario = senha_usuario;
     }
 
+    public LoginUsuario(int id, String nome_usuario, String senha_usuario) {
+        this.id = id;
+        this.nome_usuario = nome_usuario;
+        this.senha_usuario = senha_usuario;
+    }
+
     public int getId() {
         return id;
     }

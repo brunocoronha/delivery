@@ -1,4 +1,0 @@
-12;adsfasd;adsfasd;null;asdfas;asdf;asdfasdf;21
-1;asdfasdf;asdfasdf;null;asdfasdf;adfadsf;adsfasdf;1
-12;asdfasdf;asdfasdf;null;asdfasdf;adfadsf;adsfasdf;12
-2;Bruno;62986367099;null;OGH0240;Titan;Azul;15

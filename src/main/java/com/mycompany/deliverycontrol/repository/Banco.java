@@ -44,6 +44,42 @@ public class Banco {
         return connection.isClosed();
     }
 
+    public boolean inserirUsuarioSistema(LoginUsuario loginUsuario) throws SQLException {
+        String sql = "INSERT INTO login (nome_usuario, senha_usuario) VALUES (?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, loginUsuario.getNome_usuario());
+        preparedStatement.setString(2, loginUsuario.getSenha_usuario());
+        if (preparedStatement.executeUpdate() < 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean removeUsuarioSistema(Integer id) throws SQLException {
+        String sql = "DELETE FROM login WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        System.out.println("ID QUE CHEGOU NO METODO REMOVEUSUARIOSISTEMA: " + id);
+        preparedStatement.setInt(1, id);
+        if (preparedStatement.executeUpdate() < 1) {
+            return false;
+        }
+        return true;
+    }
+    public LoginUsuario buscaUsuarioSistemaPorNome(String nome) throws SQLException {
+        String sql = "SELECT * FROM login WHERE nome_usuario LIKE ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "%" + nome + "%");
+        ResultSet resultset = preparedStatement.executeQuery();
+        if (resultset.next()) {
+            int id = resultset.getInt("id");
+            String nome_usuario = resultset.getString("nome_usuario");
+            String senha_usuario = resultset.getString("senha_usuario");
+            LoginUsuario usuarioBuscado = new LoginUsuario(id, nome_usuario, senha_usuario);
+            System.out.println("Usuario encontrado: " + nome_usuario + " " );
+            return usuarioBuscado;
+        }
+        return null;
+    }
     public ArrayList<LoginUsuario> buscaUsuarios() throws SQLException {
         ArrayList<LoginUsuario> usuarios = new ArrayList<>();
         String sql = "SELECT nome_usuario, senha_usuario FROM login";
@@ -90,6 +126,7 @@ public class Banco {
         }
         return true;
     }
+
 
     public ArrayList<Entregador> buscaEntregadores() throws SQLException {
         ArrayList<Entregador> entregadores = new ArrayList<>();

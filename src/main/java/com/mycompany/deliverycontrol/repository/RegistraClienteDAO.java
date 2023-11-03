@@ -12,16 +12,7 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
 
     Banco banco = Banco.getInstance();
 
-    /*
-     * private String nomeDoArquivo = null;
-     * 
-     * public RegistraClienteDAO() {
-     * 
-     * nomeDoArquivo = System.getenv("USERPROFILE") + File.separator + "Documents" +
-     * File.separator
-     * + "dadosDelivey\\ClienteBD.txt";
-     * }
-     */
+
     @Override
     public void incluir(Cliente cliente) {
         try {

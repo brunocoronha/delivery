@@ -5,10 +5,6 @@
 package com.mycompany.deliverycontrol.view;
 
 
-import com.mycompany.deliverycontrol.view.TelaCadastroCliente;
-import com.mycompany.deliverycontrol.view.TelaCadastroEntregador;
-import com.mycompany.deliverycontrol.view.TelaRegistrarPedido;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -68,6 +64,9 @@ public class TelaPrincipalDeliveryControl extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem_CadastrarEntregador = new javax.swing.JMenuItem();
         jMenuItem_CadastrarCliente = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem_Cadastrar = new javax.swing.JMenuItem();
+        jMenuItem_Deletar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +119,26 @@ public class TelaPrincipalDeliveryControl extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Usuário do Sistema");
+
+        jMenuItem_Cadastrar.setText("Cadastrar");
+        jMenuItem_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_CadastrarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem_Cadastrar);
+
+        jMenuItem_Deletar.setText("Deletar");
+        jMenuItem_Deletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_DeletarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem_Deletar);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,6 +182,24 @@ public class TelaPrincipalDeliveryControl extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem_CadastrarClienteActionPerformed
 
+    private void jMenuItem_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CadastrarActionPerformed
+        visao.TelaCadastroUsuarioSistema telaCadastroUsuarioSistema = new visao.TelaCadastroUsuarioSistema();
+        telaCadastroUsuarioSistema.dispose();
+        telaCadastroUsuarioSistema.setLocationRelativeTo(this);
+        telaCadastroUsuarioSistema.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        telaCadastroUsuarioSistema.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem_CadastrarActionPerformed
+
+    private void jMenuItem_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_DeletarActionPerformed
+        visao.TelaDeletarUsuarioSistema telaDeletarUsuarioSistema = new visao.TelaDeletarUsuarioSistema();
+        telaDeletarUsuarioSistema.dispose();
+        telaDeletarUsuarioSistema.setLocationRelativeTo(this);
+        telaDeletarUsuarioSistema.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        telaDeletarUsuarioSistema.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem_DeletarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,9 +239,12 @@ public class TelaPrincipalDeliveryControl extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem_Cadastrar;
     private javax.swing.JMenuItem jMenuItem_CadastrarCliente;
     private javax.swing.JMenuItem jMenuItem_CadastrarEntregador;
+    private javax.swing.JMenuItem jMenuItem_Deletar;
     private javax.swing.JMenuItem jMenuItem_RegistrarPedido;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
