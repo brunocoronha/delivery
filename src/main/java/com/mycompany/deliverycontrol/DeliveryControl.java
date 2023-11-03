@@ -5,7 +5,6 @@ package com.mycompany.deliverycontrol;
 
 
 import com.mycompany.deliverycontrol.view.TelaLogin;
-import com.mycompany.deliverycontrol.view.TelaPrincipalDeliveryControl;
 
 import java.io.File;
 import java.io.IOException;
