@@ -24,7 +24,7 @@ create table Pedido(
 	id integer not null primary key auto_increment,
 	id_cliente integer,
     id_entregador integer,
-    observacao varchar(30),
+    observacao varchar(400),
     statusPedido varchar(24),
 	FOREIGN KEY (id_cliente) REFERENCES Cliente(id),
     FOREIGN KEY (id_entregador) REFERENCES Entregador(id)

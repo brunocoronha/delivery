@@ -183,7 +183,7 @@ public class TelaPrincipalDeliveryControl extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_CadastrarClienteActionPerformed
 
     private void jMenuItem_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CadastrarActionPerformed
-        visao.TelaCadastroUsuarioSistema telaCadastroUsuarioSistema = new visao.TelaCadastroUsuarioSistema();
+        TelaCadastroUsuarioSistema telaCadastroUsuarioSistema = new TelaCadastroUsuarioSistema();
         telaCadastroUsuarioSistema.dispose();
         telaCadastroUsuarioSistema.setLocationRelativeTo(this);
         telaCadastroUsuarioSistema.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -192,7 +192,7 @@ public class TelaPrincipalDeliveryControl extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_CadastrarActionPerformed
 
     private void jMenuItem_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_DeletarActionPerformed
-        visao.TelaDeletarUsuarioSistema telaDeletarUsuarioSistema = new visao.TelaDeletarUsuarioSistema();
+        TelaDeletarUsuarioSistema telaDeletarUsuarioSistema = new TelaDeletarUsuarioSistema();
         telaDeletarUsuarioSistema.dispose();
         telaDeletarUsuarioSistema.setLocationRelativeTo(this);
         telaDeletarUsuarioSistema.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
