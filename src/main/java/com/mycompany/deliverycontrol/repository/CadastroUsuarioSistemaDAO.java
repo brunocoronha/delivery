@@ -1,11 +1,9 @@
 package com.mycompany.deliverycontrol.repository;
 
 import com.mycompany.deliverycontrol.CRUD.ICadastroUsuarioSistema;
-import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.LoginUsuario;
 
 import javax.swing.*;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

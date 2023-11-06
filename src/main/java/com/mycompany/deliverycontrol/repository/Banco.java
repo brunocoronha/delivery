@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.LoginUsuario;
-import com.mysql.cj.log.Log;
+import com.mycompany.deliverycontrol.model.Pedido;
 
 import javax.swing.*;
 
@@ -32,7 +32,7 @@ public class Banco {
 
     public void conexao() throws SQLException {
         String user = "root";
-        String senha = "123456789";
+        String senha = "Getin@dm";
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DeliveryControl", user, senha);
     }
 
@@ -65,6 +65,7 @@ public class Banco {
         }
         return true;
     }
+
     public LoginUsuario buscaUsuarioSistemaPorNome(String nome) throws SQLException {
         String sql = "SELECT * FROM login WHERE nome_usuario LIKE ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -75,11 +76,12 @@ public class Banco {
             String nome_usuario = resultset.getString("nome_usuario");
             String senha_usuario = resultset.getString("senha_usuario");
             LoginUsuario usuarioBuscado = new LoginUsuario(id, nome_usuario, senha_usuario);
-            System.out.println("Usuario encontrado: " + nome_usuario + " " );
+            System.out.println("Usuario encontrado: " + nome_usuario + " ");
             return usuarioBuscado;
         }
         return null;
     }
+
     public ArrayList<LoginUsuario> buscaUsuarios() throws SQLException {
         ArrayList<LoginUsuario> usuarios = new ArrayList<>();
         String sql = "SELECT nome_usuario, senha_usuario FROM login";
@@ -93,6 +95,7 @@ public class Banco {
         }
         return usuarios;
     }
+
     public ResultSet autenticacaoUsuario(LoginUsuario novoLogin) throws SQLException {
         try {
             String sql = "SELECT * FROM login WHERE nome_usuario = ? and senha_usuario = ?";
@@ -101,11 +104,12 @@ public class Banco {
             preparedStatement.setString(2, novoLogin.getSenha_usuario());
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet;
-        }catch (SQLException erro ) {
+        } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar!" + erro.getMessage());
         }
         return null;
     }
+
     // #region CRUD_ENTREGADOR
     public void insertEntregador(Entregador entregador) throws SQLException {
         String sql = "INSERT INTO entregador (nome, telefone) VALUES (?, ?)";
@@ -126,7 +130,6 @@ public class Banco {
         }
         return true;
     }
-
 
     public ArrayList<Entregador> buscaEntregadores() throws SQLException {
         ArrayList<Entregador> entregadores = new ArrayList<>();
@@ -239,7 +242,7 @@ public class Banco {
             Cliente cliente = new Cliente(idCliente, nomeCliente, enderecoCLiente, telefoneCliente);
             System.out.println(cliente.toString());
             return cliente;
-        }        
+        }
         return null;
     }
 
@@ -256,5 +259,18 @@ public class Banco {
         return true;
     }
 
+    // #endregion
+
+    // #region CRUD_PEDIDO
+    public void insertPedido(Pedido pedido) throws SQLException {
+        System.out.println("pedido no banco " + pedido.toString());
+        String sql = "INSERT INTO pedido (id_cliente, id_entregador, observacao, statusPedido) VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, pedido.getId_cliente());
+        preparedStatement.setInt(2, pedido.getId_entregador());
+        preparedStatement.setString(3, pedido.getObservacao());
+        preparedStatement.setString(4, pedido.getStatusPedido().toString());
+        preparedStatement.executeUpdate();
+    }
     // #endregion
 }

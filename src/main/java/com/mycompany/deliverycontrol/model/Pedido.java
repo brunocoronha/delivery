@@ -15,10 +15,19 @@ public class Pedido {
     private String observacao = "";
     private StatusPedidoENUM statusPedido = null;
 
-    public Pedido(Integer id, Integer id_cliente, String observacao) {
+    public Pedido(Integer id_cliente, Integer id_entregador, String observacao, StatusPedidoENUM statusPedido) {
+        this.id_cliente = id_cliente;
+        this.id_entregador = id_entregador;
+        this.observacao = observacao;
+        this.statusPedido = statusPedido;
+    }
+
+    public Pedido(Integer id, Integer id_cliente, Integer id_entregador, String observacao, StatusPedidoENUM statusPedido){
         this.id = id;
         this.id_cliente = id_cliente;
+        this.id_entregador = id_entregador;
         this.observacao = observacao;
+        this.statusPedido = statusPedido;
     }
 
     @Override
@@ -32,10 +41,6 @@ public class Pedido {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getObservacao() {
@@ -53,7 +58,7 @@ public class Pedido {
     public void setStatusPedido(StatusPedidoENUM statusPedido) {
         this.statusPedido = statusPedido;
     }
-    
+
     public StatusPedidoENUM getStatusPedido() {
         return statusPedido;
     }

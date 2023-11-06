@@ -34,7 +34,8 @@ public class TelaRegistrarPedidoUsuario extends javax.swing.JFrame {
         IRegistraPedidoCRUD pedidos;
         IRegistraClienteCRUD clientes;
         IRegistraEntregadoresCRUD entregadores;
-
+        ArrayList<Entregador> entregadorLista;
+        
         public TelaRegistrarPedidoUsuario() {
                 initComponents();
                 pedidos = new RegistraPedidoControle();
@@ -45,7 +46,7 @@ public class TelaRegistrarPedidoUsuario extends javax.swing.JFrame {
                 this.setLocationRelativeTo(null);
                 jComboBox_buscaCliente.addItem("");
                 jComboBox_buscaCliente.addItem("ID");
-                jComboBox_buscaCliente.addItem("Nome");
+                //jComboBox_buscaCliente.addItem("Nome");
                 jComboBox_buscaCliente.setSelectedIndex(0);
                 jTextField_buscaCliente.setEditable(false);
                 jTextField_clienteNome.setEditable(false);
@@ -53,6 +54,7 @@ public class TelaRegistrarPedidoUsuario extends javax.swing.JFrame {
                 jTextField_telefoneCliente.setEditable(false);
 
                 try {
+                    entregadorLista = entregadores.listagemDeEntregador();
                     preencherComboBoxEntregador();
                 }catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -78,7 +80,6 @@ public class TelaRegistrarPedidoUsuario extends javax.swing.JFrame {
     }
 
     private void preencherComboBoxEntregador() throws Exception {
-        ArrayList<Entregador> entregadorLista = entregadores.listagemDeEntregador();
         jComboBox_Motoqueiro.removeAllItems();
         jComboBox_Motoqueiro.addItem("Escolha o Entregador:");
         for (Entregador entregador : entregadorLista) {
@@ -445,6 +446,7 @@ public class TelaRegistrarPedidoUsuario extends javax.swing.JFrame {
                 jTextField_enderecoCliente.setText(null);
                 jTextField_telefoneCliente.setText(null);
                 jComboBox_buscaCliente.setSelectedIndex(0);
+                jComboBox_Motoqueiro.setSelectedIndex(0);
         }
 
         /**

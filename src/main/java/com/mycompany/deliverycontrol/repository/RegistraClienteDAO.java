@@ -14,7 +14,7 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
 
 
     @Override
-    public void incluir(Cliente cliente) {
+    public void incluir(Cliente cliente) throws Exception {
         try {
             banco.conexao();
             banco.insertCliente(cliente);
