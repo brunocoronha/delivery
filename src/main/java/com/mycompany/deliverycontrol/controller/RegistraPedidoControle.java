@@ -29,8 +29,7 @@ public class RegistraPedidoControle implements IRegistraPedidoCRUD {
 
     @Override
     public void alterar(Pedido pedido) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+        registraPedidoPersistencia.alterar(pedido);
     }
 
     @Override
@@ -40,8 +39,7 @@ public class RegistraPedidoControle implements IRegistraPedidoCRUD {
 
     @Override
     public Pedido consultar(Integer id) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consultar'");
+        return registraPedidoPersistencia.consultar(id);
     }
 
   

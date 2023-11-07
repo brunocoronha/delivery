@@ -5,11 +5,11 @@
 package com.mycompany.deliverycontrol.repository;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraPedidoCRUD;
-import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.Pedido;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,15 +26,20 @@ public class RegistraPedidoDAO implements IRegistraPedidoCRUD {
             banco.insertPedido(pedido);
             banco.fechaConexao();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, e.getMessage() + "Erro incluir pedido");
         }
 
     }
 
     @Override
     public void alterar(Pedido pedido) throws Exception {
-
+        try{
+            banco.conexao();
+            banco.updatePedido(pedido);
+            banco.fechaConexao();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage() + "Erro alterar pedido");
+        }
     }
 
     @Override
@@ -42,17 +47,25 @@ public class RegistraPedidoDAO implements IRegistraPedidoCRUD {
         try {
             banco.conexao();
             ArrayList<Pedido> listaPedidos = null;
-            listaPedidos = banco.buscaPedidos(null);
+            listaPedidos = banco.buscaPedidos();
             banco.fechaConexao();
             return listaPedidos;
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage() + "Erro listar pedidos");
         }
         return null;
     }
 
     @Override
     public Pedido consultar(Integer id) throws Exception {
+        try{
+            banco.conexao();
+            Pedido pedido = banco.buscaPedido(id);
+            banco.fechaConexao();
+            return pedido;
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage() + "Erro Consultar Pedido");
+        }
         return null;
     }
 }

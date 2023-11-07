@@ -15,13 +15,14 @@ import com.mycompany.deliverycontrol.model.StatusPedidoENUM;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author brunocoronha.adm
  */
-public class TelaPedido extends javax.swing.JFrame {
+public final class TelaPedido extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPedido
@@ -30,6 +31,16 @@ public class TelaPedido extends javax.swing.JFrame {
     IRegistraClienteCRUD clientes;
     IRegistraEntregadoresCRUD entregadores;
     DefaultTableModel model;
+    Integer idPedido = null;
+
+    public Integer getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Integer idPedido) {
+        this.idPedido = idPedido;
+    }
+    
     public TelaPedido() {
         initComponents();
         this.setResizable(false);
@@ -40,6 +51,7 @@ public class TelaPedido extends javax.swing.JFrame {
         entregadores = new RegistraEntregadoresControle();
         model = (DefaultTableModel) jTable_pedidos.getModel();
         model.setRowCount(0);
+        preencherTabela();
     }
 
     /**
@@ -55,7 +67,7 @@ public class TelaPedido extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton_Voltar2 = new javax.swing.JButton();
+        jButton_Voltar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_pedidos = new javax.swing.JTable();
@@ -74,11 +86,11 @@ public class TelaPedido extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 178, 0));
         jLabel3.setText("Lista de Pedidos");
 
-        jButton_Voltar2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jButton_Voltar2.setText("Voltar");
-        jButton_Voltar2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Voltar.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jButton_Voltar.setText("Voltar");
+        jButton_Voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Voltar2ActionPerformed(evt);
+                jButton_VoltarActionPerformed(evt);
             }
         });
 
@@ -94,7 +106,7 @@ public class TelaPedido extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton_Voltar2)
+                        .addComponent(jButton_Voltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel11))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -107,7 +119,7 @@ public class TelaPedido extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_Voltar2)
+                    .addComponent(jButton_Voltar)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel11)
                         .addComponent(jLabel10)))
@@ -130,6 +142,11 @@ public class TelaPedido extends javax.swing.JFrame {
                 "ID", "Cliente", "Entregador", "Status"
             }
         ));
+        jTable_pedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_pedidosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_pedidos);
 
         jComboBox_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -190,36 +207,44 @@ public class TelaPedido extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_Voltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Voltar2ActionPerformed
+    private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VoltarActionPerformed
         TelaPrincipalUser telaPrincipalUser = new TelaPrincipalUser();
         telaPrincipalUser.dispose();
         telaPrincipalUser.setLocationRelativeTo(this);
         telaPrincipalUser.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         telaPrincipalUser.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton_Voltar2ActionPerformed
+    }//GEN-LAST:event_jButton_VoltarActionPerformed
 
     
     private void jButton_geraPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_geraPDFActionPerformed
-        try {
-            ArrayList<Pedido> listaPedidos = pedidos.listagemDePedidos();
-            for (Pedido p : listaPedidos) {
-                System.out.println(
-                        "ID pedido: " + p.getId() + "\n"
-                        + "Nome do Cliente: " + clientes.consultar(p.getId_cliente()).getNome() + "\n"
-                        + "Nome do Entregador: " + entregadores.consultar(p.getId_entregador()).getNome() + "\n"
-                        + "Status do pedido: " + p.getStatusPedido().toString());
-                System.out.println("");
-                adicionarLinha(model, p.getId(), clientes.consultar(p.getId_cliente()).getNome(), 
-                        entregadores.consultar(p.getId_entregador()).getNome(), p.getStatusPedido().toString());
+        
+            if(getIdPedido() != null){
+                System.out.println("ID eh -> " + getIdPedido());
+                setIdPedido(null);
+            }else{
+                JOptionPane.showMessageDialog(null, "Nenhum item selecionado");
             }
-        } catch (Exception ex) {
-            Logger.getLogger(TelaPedido.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }//GEN-LAST:event_jButton_geraPDFActionPerformed
 
-    public void preencherComboBoxStatus() {
+    private void jTable_pedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_pedidosMouseClicked
+        try {
+            Object obj = jTable_pedidos.getValueAt(jTable_pedidos.getSelectedRow(), 0);
+            Integer i = (Integer) obj;
+            setIdPedido(i);
+            Pedido pedidoAlterar = pedidos.consultar(i);
+//            for(int j = 0; j < jComboBox_status.getItemCount(); j++){
+//                String textoBox = (String)jComboBox_status.getItemAt(j);
+//                if(textoBox.equals(pedidoAlterar.get))
+//            }
+            System.out.println("ID -> " + getIdPedido());
+        } catch (Exception ex) {
+            Logger.getLogger(TelaPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTable_pedidosMouseClicked
+
+    private void preencherComboBoxStatus() {
         jComboBox_status.removeAllItems();
         jComboBox_status.addItem("Selecione um Status");
         for (StatusPedidoENUM status : StatusPedidoENUM.values()) {
@@ -227,7 +252,20 @@ public class TelaPedido extends javax.swing.JFrame {
         }
     }
     
-    private static void adicionarLinha(DefaultTableModel model, int id, String cliente, String entregador, String status) {
+    private void preencherTabela(){
+        try {
+            ArrayList<Pedido> listaPedidos = pedidos.listagemDePedidos();
+            for (Pedido p : listaPedidos) {                
+                adicionarLinha(model, p.getId(), clientes.consultar(p.getId_cliente()).getNome(), 
+                        entregadores.consultar(p.getId_entregador()).getNome(), p.getStatusPedido().toString());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + "Preencher Tabela");
+        }
+    }
+    
+    
+    private void adicionarLinha(DefaultTableModel model, int id, String cliente, String entregador, String status) {
         model.addRow(new Object[]{id, cliente, entregador, status});
     }
     
@@ -268,22 +306,12 @@ public class TelaPedido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Voltar;
-    private javax.swing.JButton jButton_Voltar1;
-    private javax.swing.JButton jButton_Voltar2;
     private javax.swing.JButton jButton_alterarStatus;
     private javax.swing.JButton jButton_geraPDF;
     private javax.swing.JComboBox<String> jComboBox_status;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;

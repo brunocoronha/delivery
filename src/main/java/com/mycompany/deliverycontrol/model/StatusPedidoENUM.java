@@ -16,7 +16,7 @@ public enum StatusPedidoENUM {
         PEDIDO_SAIU_ENTREGA("Pedido saiu para Entrega"),
         PEDIDO_ENTREGUE("Pedido entregue");
     
-        private String descricao;
+        private final String descricao;
     
         StatusPedidoENUM(String descricao) {
             this.descricao = descricao;
@@ -25,5 +25,14 @@ public enum StatusPedidoENUM {
         public String getDescricao() {
             return descricao;
         }
+        
+        public static StatusPedidoENUM fromString(String descricao) {
+        for (StatusPedidoENUM status : StatusPedidoENUM.values()) {
+            if (status.descricao.equalsIgnoreCase(descricao)) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Descrição não correspondente a nenhum valor do enum.");
+    }
     
 }

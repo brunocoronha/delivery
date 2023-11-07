@@ -274,7 +274,7 @@ public class Banco {
         preparedStatement.executeUpdate();
     }
 
-    public ArrayList<Pedido> buscaPedidos(Pedido pedido) throws SQLException {
+    public ArrayList<Pedido> buscaPedidos() throws SQLException {
         ArrayList<Pedido> pedidos = new ArrayList<>();
         String sql = "SELECT id, id_cliente, id_entregador, observacao, statusPedido FROM pedido";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -284,12 +284,40 @@ public class Banco {
             Integer id_cliente = resultSet.getInt("id_cliente");
             Integer id_entregador = resultSet.getInt("id_entregador");
             String observacao = resultSet.getString("observacao");
-            String statusPedido = resultSet.getString("statusPedido");
-            StatusPedidoENUM status = StatusPedidoENUM.valueOf(statusPedido);
+            StatusPedidoENUM status = StatusPedidoENUM.valueOf(resultSet.getString("statusPedido"));
             Pedido p = new Pedido(id, id_cliente, id_entregador, observacao, status);
             pedidos.add(p);
         }
         return pedidos;
     }
+
+    public Pedido buscaPedido(Integer id) throws SQLException {
+        String sql = "SELECT id, id_cliente, id_entregador, observacao, statusPedido FROM pedido WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        ResultSet resultset = preparedStatement.executeQuery();
+        if (resultset.next()) {
+            int idPedido = resultset.getInt("id");
+            int id_cliente = resultset.getInt("id_cliente");
+            int id_entregador = resultset.getInt("id_entregador");
+            String observacao = resultset.getString("observacao");
+            StatusPedidoENUM status = StatusPedidoENUM.valueOf(resultset.getString("statusPedido"));
+            Pedido pedido = new Pedido(idPedido, id_cliente, id_entregador, observacao, status);
+            //System.out.println(cliente.toString());
+            return pedido;
+        }
+        return null;
+    }
+
+    public boolean updatePedido(Pedido pedido) throws SQLException {
+        String sql = "UPDATE pedido SET statusPedidos = ? WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, pedido.getStatusPedido().toString());
+        if (preparedStatement.executeUpdate() < 1) {
+            return false;
+        }
+        return true;
+    }
+
     // #endregion
 }
