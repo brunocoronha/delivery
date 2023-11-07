@@ -33,7 +33,7 @@ public class Banco {
 
     public void conexao() throws SQLException {
         String user = "root";
-        String senha = "Getin@dm";
+        String senha = "123456789";
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DeliveryControl", user, senha);
     }
 
@@ -310,9 +310,10 @@ public class Banco {
     }
 
     public boolean updatePedido(Pedido pedido) throws SQLException {
-        String sql = "UPDATE pedido SET statusPedidos = ? WHERE id = ?";
+        String sql = "UPDATE pedido SET statusPedido = ? WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, pedido.getStatusPedido().toString());
+        preparedStatement.setInt(2, pedido.getId());
         if (preparedStatement.executeUpdate() < 1) {
             return false;
         }

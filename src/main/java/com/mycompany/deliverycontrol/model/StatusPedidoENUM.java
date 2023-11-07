@@ -12,7 +12,7 @@ public enum StatusPedidoENUM {
 
         PEDIDO_RECEBIDO("Pedido recebido"),
         PEDIDO_EM_PREPARO("Pedido em preparo"),
-        PEDIDO_AGUARDANDO_RETIRDA("Aguardando coleta do entregador"),
+        AGUARDANDO_RETIRDA("Aguardando coleta do entregador"),
         PEDIDO_SAIU_ENTREGA("Pedido saiu para Entrega"),
         PEDIDO_ENTREGUE("Pedido entregue");
     
