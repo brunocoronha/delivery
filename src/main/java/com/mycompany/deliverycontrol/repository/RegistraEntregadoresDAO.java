@@ -47,7 +47,6 @@ public class RegistraEntregadoresDAO implements IRegistraEntregadoresCRUD {
         try {
             banco.conexao();
             ArrayList<Entregador> listaEntregadores = null;
-            banco.conexao();
             listaEntregadores = banco.buscaEntregadores();
             banco.fechaConexao();
             return listaEntregadores;

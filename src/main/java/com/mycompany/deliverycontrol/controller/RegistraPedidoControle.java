@@ -35,8 +35,7 @@ public class RegistraPedidoControle implements IRegistraPedidoCRUD {
 
     @Override
     public ArrayList<Pedido> listagemDePedidos() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listagemDePedidos'");
+        return registraPedidoPersistencia.listagemDePedidos();
     }
 
     @Override

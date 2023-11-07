@@ -5,6 +5,7 @@
 package com.mycompany.deliverycontrol.repository;
 
 import com.mycompany.deliverycontrol.CRUD.IRegistraPedidoCRUD;
+import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.Pedido;
 
 import java.sql.SQLException;
@@ -38,6 +39,15 @@ public class RegistraPedidoDAO implements IRegistraPedidoCRUD {
 
     @Override
     public ArrayList<Pedido> listagemDePedidos() throws Exception {
+        try {
+            banco.conexao();
+            ArrayList<Pedido> listaPedidos = null;
+            listaPedidos = banco.buscaPedidos(null);
+            banco.fechaConexao();
+            return listaPedidos;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

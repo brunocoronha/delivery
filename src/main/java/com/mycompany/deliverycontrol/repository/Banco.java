@@ -11,6 +11,7 @@ import com.mycompany.deliverycontrol.model.Cliente;
 import com.mycompany.deliverycontrol.model.Entregador;
 import com.mycompany.deliverycontrol.model.LoginUsuario;
 import com.mycompany.deliverycontrol.model.Pedido;
+import com.mycompany.deliverycontrol.model.StatusPedidoENUM;
 
 import javax.swing.*;
 
@@ -271,6 +272,24 @@ public class Banco {
         preparedStatement.setString(3, pedido.getObservacao());
         preparedStatement.setString(4, pedido.getStatusPedido().toString());
         preparedStatement.executeUpdate();
+    }
+
+    public ArrayList<Pedido> buscaPedidos(Pedido pedido) throws SQLException {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT id, id_cliente, id_entregador, observacao, statusPedido FROM pedido";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Integer id = resultSet.getInt("id");
+            Integer id_cliente = resultSet.getInt("id_cliente");
+            Integer id_entregador = resultSet.getInt("id_entregador");
+            String observacao = resultSet.getString("observacao");
+            String statusPedido = resultSet.getString("statusPedido");
+            StatusPedidoENUM status = StatusPedidoENUM.valueOf(statusPedido);
+            Pedido p = new Pedido(id, id_cliente, id_entregador, observacao, status);
+            pedidos.add(p);
+        }
+        return pedidos;
     }
     // #endregion
 }
