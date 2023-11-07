@@ -7,6 +7,7 @@ package com.mycompany.deliverycontrol.view;
 import com.mycompany.deliverycontrol.CRUD.IRegistraClienteCRUD;
 import com.mycompany.deliverycontrol.CRUD.IRegistraEntregadoresCRUD;
 import com.mycompany.deliverycontrol.CRUD.IRegistraPedidoCRUD;
+import com.mycompany.deliverycontrol.controller.ExportarPDF;
 import com.mycompany.deliverycontrol.controller.RegistraClienteControle;
 import com.mycompany.deliverycontrol.controller.RegistraEntregadoresControle;
 import com.mycompany.deliverycontrol.controller.RegistraPedidoControle;
@@ -60,7 +61,7 @@ public final class TelaPedido extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
@@ -76,7 +77,6 @@ public final class TelaPedido extends javax.swing.JFrame {
         jButton_geraPDF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(600, 500));
 
         jPanel3.setBackground(new java.awt.Color(65, 31, 21));
         jPanel3.setForeground(new java.awt.Color(65, 31, 21));
@@ -97,52 +97,51 @@ public final class TelaPedido extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel10)
-                                .addGap(192, 192, 192))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout
-                                                .createSequentialGroup()
-                                                .addComponent(jButton_Voltar)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel11))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap()));
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(192, 192, 192))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton_Voltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
         jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton_Voltar)
-                                        .addGroup(jPanel3Layout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel11)
-                                                .addComponent(jLabel10)))
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)));
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_Voltar)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel10)))
+                .addGap(46, 46, 46)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
+        );
 
         jPanel4.setBackground(new java.awt.Color(65, 31, 21));
         jPanel4.setForeground(new java.awt.Color(65, 31, 21));
 
         jTable_pedidos.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null }
-                },
-                new String[] {
-                        "ID", "Cliente", "Entregador", "Status"
-                }));
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Cliente", "Entregador", "Status"
+            }
+        ));
         jTable_pedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_pedidosMouseClicked(evt);
@@ -150,10 +149,14 @@ public final class TelaPedido extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable_pedidos);
 
-        jComboBox_status.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton_alterarStatus.setText("Alterar");
+        jButton_alterarStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_alterarStatusActionPerformed(evt);
+            }
+        });
 
         jButton_geraPDF.setText("PDF");
         jButton_geraPDF.addActionListener(new java.awt.event.ActionListener() {
@@ -165,66 +168,52 @@ public final class TelaPedido extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                                .addComponent(jComboBox_status, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButton_alterarStatus)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButton_geraPDF))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(13, 13, 13)));
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jComboBox_status, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_alterarStatus)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_geraPDF))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13))
+        );
         jPanel4Layout.setVerticalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addContainerGap(38, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton_geraPDF)
-                                        .addComponent(jButton_alterarStatus)
-                                        .addComponent(jComboBox_status, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap()));
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_geraPDF)
+                    .addComponent(jButton_alterarStatus)
+                    .addComponent(jComboBox_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_VoltarActionPerformed
-        TelaPrincipalUser telaPrincipalUser = new TelaPrincipalUser();
-        telaPrincipalUser.dispose();
-        telaPrincipalUser.setLocationRelativeTo(this);
-        telaPrincipalUser.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        telaPrincipalUser.setVisible(true);
-        dispose();
-    }// GEN-LAST:event_jButton_VoltarActionPerformed
-
-    private void jButton_geraPDFActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_geraPDFActionPerformed
-
+    private void jButton_alterarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_alterarStatusActionPerformed
+        
         if (getIdPedido() != null) {
             try {
                 Pedido p = pedidos.consultar(getIdPedido());
@@ -236,6 +225,7 @@ public final class TelaPedido extends javax.swing.JFrame {
                 System.out.println("ID eh -> " + getIdPedido());
                 preencherTabela();
                 setIdPedido(null);
+                jComboBox_status.setSelectedIndex(0);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -244,6 +234,24 @@ public final class TelaPedido extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Nenhum item selecionado");
         }
+    }//GEN-LAST:event_jButton_alterarStatusActionPerformed
+
+    private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_VoltarActionPerformed
+        TelaPrincipalUser telaPrincipalUser = new TelaPrincipalUser();
+        telaPrincipalUser.dispose();
+        telaPrincipalUser.setLocationRelativeTo(this);
+        telaPrincipalUser.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        telaPrincipalUser.setVisible(true);
+        dispose();
+    }// GEN-LAST:event_jButton_VoltarActionPerformed
+    
+    private void jButton_geraPDFActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_geraPDFActionPerformed
+        try {
+            ExportarPDF.exportToPDF(jTable_pedidos);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
 
     }// GEN-LAST:event_jButton_geraPDFActionPerformed
 

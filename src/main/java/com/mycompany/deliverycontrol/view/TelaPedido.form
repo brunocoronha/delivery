@@ -3,9 +3,6 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -242,6 +239,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alterar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_alterarStatusActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton_geraPDF">
           <Properties>

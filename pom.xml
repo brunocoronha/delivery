@@ -17,5 +17,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version> <!-- A versão pode variar, use a mais recente -->
         </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.2</version> <!-- Verifique a versão mais recente -->
+        </dependency>
+
     </dependencies>
 </project>
