@@ -63,6 +63,8 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         jMenuItem_RegistrarPedido = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem_CadastrarCliente = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem_VisualizaAlterarPedidos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,18 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Visualizar / Alterar");
+
+        jMenuItem_VisualizaAlterarPedidos.setText("Pedidos");
+        jMenuItem_VisualizaAlterarPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_VisualizaAlterarPedidosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem_VisualizaAlterarPedidos);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,7 +143,7 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         registrarPedidoUsuario.setLocationRelativeTo(this);
         registrarPedidoUsuario.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         registrarPedidoUsuario.setVisible(true);
-        dispose();
+//        dispose();
     }//GEN-LAST:event_jMenuItem_RegistrarPedidoActionPerformed
 
     private void jMenuItem_CadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CadastrarClienteActionPerformed
@@ -138,9 +152,16 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         telaCadastroClienteUsuario.setLocationRelativeTo(this);
         telaCadastroClienteUsuario.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         telaCadastroClienteUsuario.setVisible(true);
-        dispose();
+//        dispose();
     }//GEN-LAST:event_jMenuItem_CadastrarClienteActionPerformed
 
+    private void jMenuItem_VisualizaAlterarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_VisualizaAlterarPedidosActionPerformed
+        TelaPedidoUsuario telaPedidoUsuario = new TelaPedidoUsuario();
+        telaPedidoUsuario.dispose();
+        telaPedidoUsuario.setLocationRelativeTo(this);
+        telaPedidoUsuario.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        telaPedidoUsuario.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -180,9 +201,11 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem_CadastrarCliente;
     private javax.swing.JMenuItem jMenuItem_RegistrarPedido;
+    private javax.swing.JMenuItem jMenuItem_VisualizaAlterarPedidos;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

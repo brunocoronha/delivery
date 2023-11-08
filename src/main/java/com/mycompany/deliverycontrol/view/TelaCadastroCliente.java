@@ -329,11 +329,11 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VoltarActionPerformed
-        TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
-        telaPrincipalDeliveryControl.dispose();
-        telaPrincipalDeliveryControl.setLocationRelativeTo(this);
-        telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        telaPrincipalDeliveryControl.setVisible(true);
+//        TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
+//        telaPrincipalDeliveryControl.dispose();
+//        telaPrincipalDeliveryControl.setLocationRelativeTo(this);
+//        telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        telaPrincipalDeliveryControl.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton_VoltarActionPerformed
 
@@ -377,16 +377,21 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }// GEN-LAST:event_jButton_limparActionPerformed
 
     private void jButton_salvarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_salvarActionPerformed
-        String nome = jTextField_nome.getText();
-        String endereco = jTextField_Endereco.getText();
-        String telefone = jTextField_telefone.getText();
-        Cliente cliente = new Cliente(nome, endereco, telefone);
+
         try {
+            String nome = jTextField_nome.getText();
+            if (nome.equals("")) throw new Exception("Favor inserir um nome!");
+            String endereco = jTextField_Endereco.getText();
+            if (endereco.equals("")) throw new Exception("Favor inserir um Endereço!");
+            String telefone = jTextField_telefone.getText();
+            if (telefone.equals("")) throw new Exception("Favor inserir um Telefone!");
+
+            Cliente cliente = new Cliente(nome, endereco, telefone);
+
             registraCliente.incluir(cliente);
             PreencheTabelas.preencherTabelaClientes(modeloTabela, registraCliente.listagemDeCliente());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null,e.getMessage());
         }
 
     }// GEN-LAST:event_jButton_salvarActionPerformed

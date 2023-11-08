@@ -320,11 +320,11 @@ public class TelaCadastroEntregador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VoltarActionPerformed
-        TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
-        telaPrincipalDeliveryControl.dispose();
-        telaPrincipalDeliveryControl.setLocationRelativeTo(this);
-        telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        telaPrincipalDeliveryControl.setVisible(true);
+//        TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
+//        telaPrincipalDeliveryControl.dispose();
+//        telaPrincipalDeliveryControl.setLocationRelativeTo(this);
+//        telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        telaPrincipalDeliveryControl.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton_VoltarActionPerformed
 

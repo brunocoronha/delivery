@@ -45,11 +45,10 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
         this.setTitle("Registrar pedido");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        jComboBox_buscaCliente.addItem("");
         jComboBox_buscaCliente.addItem("ID");
         //jComboBox_buscaCliente.addItem("Nome");
         jComboBox_buscaCliente.setSelectedIndex(0);
-        jTextField_buscaCliente.setEditable(false);
+//        jTextField_buscaCliente.setEditable(false);
         jTextField_clienteNome.setEditable(false);
         jTextField_enderecoCliente.setEditable(false);
         jTextField_telefoneCliente.setEditable(false);
@@ -143,6 +142,11 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
             }
         });
 
+        jTextField_buscaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_buscaClienteKeyTyped(evt);
+            }
+        });
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -217,6 +221,7 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
             }
         });
 
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Buscar Cliente:");
@@ -249,6 +254,7 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
                 jButton_registrarClienteActionPerformed(evt);
             }
         });
+
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -416,11 +422,7 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_VoltarActionPerformed
-        TelaPrincipalDeliveryControl telaPrincipalDeliveryControl = new TelaPrincipalDeliveryControl();
-        telaPrincipalDeliveryControl.dispose();
-        telaPrincipalDeliveryControl.setLocationRelativeTo(this);
-        telaPrincipalDeliveryControl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        telaPrincipalDeliveryControl.setVisible(true);
+
         dispose();
     }// GEN-LAST:event_jButton_VoltarActionPerformed
 
@@ -430,48 +432,25 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
 
     // #region
     private void jButton_BuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_BuscaClienteActionPerformed
-        if (jComboBox_buscaCliente.getSelectedIndex() == 1) {
             try {
+                if ( jTextField_buscaCliente.getText().equals("")) throw  new Exception("Digite um ID para buscar o cliente!");
                 Cliente cliente = clientes.consultar(Integer.valueOf(jTextField_buscaCliente.getText()));
-                jTextField_clienteNome.setText(cliente.getNome());
-                jTextField_enderecoCliente.setText(cliente.getEndereco());
-                jTextField_telefoneCliente.setText(cliente.getTelefone());
-                System.out.println(cliente.toString());
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } else if (jComboBox_buscaCliente.getSelectedIndex() == 2) {
-            try {
-                Cliente cliente = clientes.consultarPorNome(jTextField_buscaCliente.getText());
-                jTextField_clienteNome.setText(cliente.getNome());
-                jTextField_enderecoCliente.setText(cliente.getEndereco());
-                jTextField_telefoneCliente.setText(cliente.getTelefone());
-                System.out.println(cliente.toString());
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
 
+                if ( cliente == null )throw  new Exception("Cliente não encontrado!!");
+                    jTextField_clienteNome.setText(cliente.getNome());
+                jTextField_enderecoCliente.setText(cliente.getEndereco());
+                jTextField_telefoneCliente.setText(cliente.getTelefone());
+                System.out.println(cliente.toString());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }// GEN-LAST:event_jButton_BuscaClienteActionPerformed
 
     private void jTextField_buscaClienteKeyTyped(java.awt.event.KeyEvent evt) {
-        try {
-            String caracteres = "0123456789";
-            if (jComboBox_buscaCliente.getSelectedIndex() == 1) {
-                if (!caracteres.contains(evt.getKeyChar() + "")) {
-                    evt.consume();
-                }
-            } else if (jComboBox_buscaCliente.getSelectedIndex() == 2) {
-                if (caracteres.contains(evt.getKeyChar() + "")) {
-                    evt.consume();
-                }
-            }
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(this, erro.getMessage());
+        String caracteres = "0123456789";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
         }
-
     }
 
     private void jTextField_buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField_buscaClienteActionPerformed
@@ -479,22 +458,15 @@ public class TelaRegistrarPedido extends javax.swing.JFrame {
     }// GEN-LAST:event_jTextField_buscaClienteActionPerformed
 
     private void jComboBox_buscaClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox_buscaClienteActionPerformed
-        if (jComboBox_buscaCliente.getSelectedIndex() != 0) {
-            jTextField_buscaCliente.setEditable(true);
-        } else {
-            jTextField_buscaCliente.setText("");
-            jTextField_buscaCliente.setEditable(false);
 
-        }
     }// GEN-LAST:event_jComboBox_buscaClienteActionPerformed
 
     private void jButton_registrarClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_registrarClienteActionPerformed
-        TelaCadastroCliente telaCliente = new TelaCadastroCliente();
-        telaCliente.setVisible(true);
+        TelaCadastroClienteUsuario telaClienteClienteUsuario = new TelaCadastroClienteUsuario();
+        telaClienteClienteUsuario.setVisible(true);
     }// GEN-LAST:event_jButton_registrarClienteActionPerformed
 
     private void jButton_salvarPedidoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_salvarPedidoActionPerformed
-
         if (jComboBox_Motoqueiro.getSelectedIndex() != 0) {
             Entregador entregadorSelecionado = null;
             Integer idCliente = Integer.valueOf(jTextField_buscaCliente.getText());

@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author brunocoronha.adm
  */
-public final class TelaPedido extends javax.swing.JFrame {
+public final class TelaPedidoUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPedido
@@ -47,7 +47,7 @@ public final class TelaPedido extends javax.swing.JFrame {
         this.idPedido = idPedido;
     }
 
-    public TelaPedido() {
+    public TelaPedidoUsuario() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -236,6 +236,7 @@ public final class TelaPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_alterarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_alterarStatusActionPerformed
+        
         if (getIdPedido() != null) {
             try {
                 Pedido p = pedidos.consultar(getIdPedido());
@@ -290,7 +291,7 @@ public final class TelaPedido extends javax.swing.JFrame {
             }
             System.out.println("ID -> " + getIdPedido());
         } catch (Exception ex) {
-            Logger.getLogger(TelaPedido.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaPedidoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }// GEN-LAST:event_jTable_pedidosMouseClicked
 
@@ -340,16 +341,16 @@ public final class TelaPedido extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null,
+            java.util.logging.Logger.getLogger(TelaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null,
                     ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null,
+            java.util.logging.Logger.getLogger(TelaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null,
                     ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null,
+            java.util.logging.Logger.getLogger(TelaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null,
                     ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null,
+            java.util.logging.Logger.getLogger(TelaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null,
                     ex);
         }
         // </editor-fold>
@@ -357,7 +358,7 @@ public final class TelaPedido extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPedido().setVisible(true);
+                new TelaPedidoUsuario().setVisible(true);
             }
         });
     }

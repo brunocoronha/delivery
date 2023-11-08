@@ -178,13 +178,17 @@ public class Banco {
 
     // #region CRUD_CLIENTE
 
-    public void insertCliente(Cliente cliente) throws SQLException {
+    public boolean insertCliente(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, endereco, telefone) VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, cliente.getNome());
         preparedStatement.setString(2, cliente.getEndereco());
         preparedStatement.setString(3, cliente.getTelefone());
         preparedStatement.executeUpdate();
+        if (preparedStatement.executeUpdate() < 1) {
+            return false;
+        }
+        return true;
     }
 
     public boolean removeCliente(Integer id) throws SQLException {
@@ -263,7 +267,7 @@ public class Banco {
     // #endregion
 
     // #region CRUD_PEDIDO
-    public void insertPedido(Pedido pedido) throws SQLException {
+    public boolean insertPedido(Pedido pedido) throws SQLException {
         System.out.println("pedido no banco " + pedido.toString());
         String sql = "INSERT INTO pedido (id_cliente, id_entregador, observacao, statusPedido) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -271,7 +275,10 @@ public class Banco {
         preparedStatement.setInt(2, pedido.getId_entregador());
         preparedStatement.setString(3, pedido.getObservacao());
         preparedStatement.setString(4, pedido.getStatusPedido().toString());
-        preparedStatement.executeUpdate();
+        if (preparedStatement.executeUpdate() < 1) {
+            return false;
+        }
+        return true;
     }
 
     public ArrayList<Pedido> buscaPedidos() throws SQLException {

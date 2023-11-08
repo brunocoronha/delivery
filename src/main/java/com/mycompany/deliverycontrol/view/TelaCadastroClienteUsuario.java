@@ -329,11 +329,11 @@ public class TelaCadastroClienteUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VoltarActionPerformed
-        TelaPrincipalUser telaPrincipalUser = new TelaPrincipalUser();
-        telaPrincipalUser.dispose();
-        telaPrincipalUser.setLocationRelativeTo(this);
-        telaPrincipalUser.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        telaPrincipalUser.setVisible(true);
+//        TelaPrincipalUser telaPrincipalUser = new TelaPrincipalUser();
+//        telaPrincipalUser.dispose();
+//        telaPrincipalUser.setLocationRelativeTo(this);
+//        telaPrincipalUser.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        telaPrincipalUser.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton_VoltarActionPerformed
 

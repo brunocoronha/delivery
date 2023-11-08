@@ -11,10 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author brunocoronha.adm
- */
+
 public class RegistraPedidoDAO implements IRegistraPedidoCRUD {
 
     Banco banco = Banco.getInstance();
@@ -23,7 +20,12 @@ public class RegistraPedidoDAO implements IRegistraPedidoCRUD {
     public void incluir(Pedido pedido) throws Exception  {
         try {
             banco.conexao();
-            banco.insertPedido(pedido);
+            boolean inseriu = banco.insertPedido(pedido);
+            if (inseriu) {
+                JOptionPane.showMessageDialog(null, "Pedido registrado com sucesso!");
+            }else {
+                JOptionPane.showMessageDialog(null, "Não foi possivel registrar o pedido!");
+            }
             banco.fechaConexao();
         } catch (SQLException e) {
            JOptionPane.showMessageDialog(null, e.getMessage() + "Erro incluir pedido");

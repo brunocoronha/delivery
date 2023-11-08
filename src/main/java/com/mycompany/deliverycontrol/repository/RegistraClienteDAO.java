@@ -17,7 +17,12 @@ public class RegistraClienteDAO implements IRegistraClienteCRUD {
     public void incluir(Cliente cliente) throws Exception {
         try {
             banco.conexao();
-            banco.insertCliente(cliente);
+            boolean inseriu = banco.insertCliente(cliente);
+            if (inseriu) {
+                JOptionPane.showMessageDialog(null, "Usuario inserido com sucesso!");
+            }else {
+                JOptionPane.showMessageDialog(null, "Não foi possivel inserir o usuario!");
+            }
             banco.fechaConexao();
         } catch (SQLException e) {
             e.printStackTrace();
